@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://1jxgf3akb6ir"]
+
+[ext_resource type="Script" uid="uid://dfwta8wrms4fo" path="res://Scripts/Enemies/EnemyWalking.gd" id="1_5dndt"]
+[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_5ghqi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6hjse"]
+radius = 100.0
+
+[node name="EnemyWalking" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 10
+scale = Vector2(0.85, 0.85)
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_5dndt")
+MOVEMENT_SPEED = 75.0
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0.34902, 1)
+rotation = -1.57079
+texture = ExtResource("2_5ghqi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6hjse")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 15.0
+debug_path_custom_line_width = 10.0
+
+[node name="PathCalculationTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="PathCalculationTimer" to="." method="_on_path_calculation_timer_timeout"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4xmmv3ww4l3p"]
+
+[ext_resource type="Script" uid="uid://c47gwj7dak5j" path="res://Scripts/Enemies/EnemyRanged.gd" id="1_1at0e"]
+[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_hdy7s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w56bn"]
+radius = 80.0
+
+[node name="EnemyRanged" type="CharacterBody2D"]
+z_index = 10
+scale = Vector2(0.6, 0.6)
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_1at0e")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+rotation = -1.57079
+texture = ExtResource("2_hdy7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w56bn")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_line_width = 2.0
+
+[node name="PathCalculationTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 5
+
+[node name="TrajectoryCheckLeft_RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-20, 0)
+collision_mask = 5
+
+[node name="TrajectoryCheckRight_RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(38, 0)
+collision_mask = 5
+
+[connection signal="timeout" from="PathCalculationTimer" to="." method="_on_path_calculation_timer_timeout"]

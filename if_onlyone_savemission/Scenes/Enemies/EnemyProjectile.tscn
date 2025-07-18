@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://3aa1qwnwseh8"]
+
+[ext_resource type="Script" uid="uid://c3hr3rj2ub3mv" path="res://Scripts/Enemies/EnemyProjectile.gd" id="1_nyg1c"]
+[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_b8dpc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kthr8"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bi23y"]
+radius = 15.0
+
+[node name="EnemyProjectile" type="StaticBody2D" groups=["Enemies"]]
+z_index = 10
+scale = Vector2(1.5, 1.5)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_nyg1c")
+
+[node name="ProjectileSprite" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_kthr8")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_b8dpc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bi23y")
