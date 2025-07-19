@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3nrx4ogcfxml"]
+[gd_scene load_steps=15 format=3 uid="uid://b3nrx4ogcfxml"]
 
 [ext_resource type="Script" uid="uid://44tdvccu5w1g" path="res://Scripts/Player/Player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://ffn7cr302qkc" path="res://Assets/Sprites/PlayerIdle.png" id="2_ft8w5"]
-[ext_resource type="Script" uid="uid://gmoeknbubjgr" path="res://Scenes/Player/WeaponRotation.gd" id="3_h54ih"]
+[ext_resource type="Script" uid="uid://gmoeknbubjgr" path="res://Scripts/Player/WeaponRotation.gd" id="3_h54ih"]
+[ext_resource type="Texture2D" uid="uid://cqqgt05fxr4ws" path="res://Assets/Sprites/Weapon.png" id="4_ude3g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbkls"]
 radius = 40.0
@@ -27,6 +28,28 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wape"]
+atlas = ExtResource("4_ude3g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t26db"]
+atlas = ExtResource("4_ude3g")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fk5o5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wape")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t26db")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ft8w5"]
@@ -70,20 +93,10 @@ position = Vector2(11.6, 2.8)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("3_h54ih")
 
-[node name="ColorRect" type="ColorRect" parent="PlayerAnimatedSprite_V1/Weapon"]
-modulate = Color(0.913725, 0.564706, 0.298039, 1)
-offset_left = -5.0
-offset_top = -8.0
-offset_right = 21.0
-offset_bottom = 7.0
-
-[node name="ColorRect2" type="ColorRect" parent="PlayerAnimatedSprite_V1/Weapon/ColorRect"]
-modulate = Color(0.913725, 0.564706, 0.298039, 1)
-offset_left = 17.0
-offset_top = 3.0
-offset_right = 26.0
-offset_bottom = 12.0
-color = Color(0.85098, 0.431373, 0.145098, 1)
+[node name="WeaponAnimatedSprite" type="AnimatedSprite2D" parent="PlayerAnimatedSprite_V1/Weapon"]
+position = Vector2(7, -5.96046e-08)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_fk5o5")
 
 [node name="PlayerAnimatedSprite_V2" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
@@ -96,19 +109,9 @@ position = Vector2(12.8, 6.8)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("3_h54ih")
 
-[node name="ColorRect" type="ColorRect" parent="PlayerAnimatedSprite_V2/Weapon2"]
-modulate = Color(0.913725, 0.564706, 0.298039, 1)
-offset_left = -5.0
-offset_top = -8.0
-offset_right = 21.0
-offset_bottom = 7.0
-
-[node name="ColorRect2" type="ColorRect" parent="PlayerAnimatedSprite_V2/Weapon2/ColorRect"]
-modulate = Color(0.913725, 0.564706, 0.298039, 1)
-offset_left = 17.0
-offset_top = 3.0
-offset_right = 26.0
-offset_bottom = 12.0
-color = Color(0.85098, 0.431373, 0.145098, 1)
+[node name="WeaponAnimatedSprite2" type="AnimatedSprite2D" parent="PlayerAnimatedSprite_V2/Weapon2"]
+position = Vector2(8, 0)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_fk5o5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
