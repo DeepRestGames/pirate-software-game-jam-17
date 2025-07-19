@@ -1,7 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://1jxgf3akb6ir"]
+[gd_scene load_steps=10 format=3 uid="uid://1jxgf3akb6ir"]
 
 [ext_resource type="Script" uid="uid://dfwta8wrms4fo" path="res://Scripts/Enemies/EnemyWalking.gd" id="1_5dndt"]
 [ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_5ghqi"]
+[ext_resource type="Texture2D" uid="uid://k6hl0wm6ll7d" path="res://Assets/Sprites/CrawlerWalk.png" id="2_ixnyl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpq6c"]
+atlas = ExtResource("2_ixnyl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv83f"]
+atlas = ExtResource("2_ixnyl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eo1u"]
+atlas = ExtResource("2_ixnyl")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3a0f"]
+atlas = ExtResource("2_ixnyl")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8hws2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpq6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv83f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eo1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3a0f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6hjse"]
 radius = 100.0
@@ -16,7 +53,14 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_5dndt")
 MOVEMENT_SPEED = 75.0
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_8hws2")
+autoplay = "default"
+frame_progress = 0.934513
+
 [node name="EnemySprite" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0, 0.34902, 1)
 rotation = -1.57079
 texture = ExtResource("2_5ghqi")
