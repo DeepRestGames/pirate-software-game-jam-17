@@ -1,10 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3nrx4ogcfxml"]
+[gd_scene load_steps=11 format=3 uid="uid://b3nrx4ogcfxml"]
 
 [ext_resource type="Script" uid="uid://44tdvccu5w1g" path="res://Scripts/Player/Player.gd" id="1_kyqiw"]
-[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="1_rpqav"]
+[ext_resource type="Texture2D" uid="uid://ffn7cr302qkc" path="res://Assets/Sprites/PlayerIdle.png" id="2_ft8w5"]
+[ext_resource type="Script" uid="uid://gmoeknbubjgr" path="res://Scenes/Player/WeaponRotation.gd" id="3_h54ih"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbkls"]
 radius = 40.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ude3g"]
+atlas = ExtResource("2_ft8w5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmcll"]
+atlas = ExtResource("2_ft8w5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wape"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ude3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmcll")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft8w5"]
+atlas = ExtResource("2_ft8w5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h54ih"]
+atlas = ExtResource("2_ft8w5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jmcll"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ft8w5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h54ih")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 6
@@ -13,8 +58,57 @@ script = ExtResource("1_kyqiw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qbkls")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_rpqav")
+[node name="PlayerAnimatedSprite_V1" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_4wape")
+autoplay = "default"
+frame_progress = 0.018586
+
+[node name="Weapon" type="Node2D" parent="PlayerAnimatedSprite_V1"]
+position = Vector2(11.6, 2.8)
+scale = Vector2(0.4, 0.4)
+script = ExtResource("3_h54ih")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerAnimatedSprite_V1/Weapon"]
+modulate = Color(0.913725, 0.564706, 0.298039, 1)
+offset_left = -5.0
+offset_top = -8.0
+offset_right = 21.0
+offset_bottom = 7.0
+
+[node name="ColorRect2" type="ColorRect" parent="PlayerAnimatedSprite_V1/Weapon/ColorRect"]
+modulate = Color(0.913725, 0.564706, 0.298039, 1)
+offset_left = 17.0
+offset_top = 3.0
+offset_right = 26.0
+offset_bottom = 12.0
+color = Color(0.85098, 0.431373, 0.145098, 1)
+
+[node name="PlayerAnimatedSprite_V2" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_jmcll")
+autoplay = "default"
+frame_progress = 0.874584
+
+[node name="Weapon2" type="Node2D" parent="PlayerAnimatedSprite_V2"]
+position = Vector2(12.8, 6.8)
+scale = Vector2(0.4, 0.4)
+script = ExtResource("3_h54ih")
+
+[node name="ColorRect" type="ColorRect" parent="PlayerAnimatedSprite_V2/Weapon2"]
+modulate = Color(0.913725, 0.564706, 0.298039, 1)
+offset_left = -5.0
+offset_top = -8.0
+offset_right = 21.0
+offset_bottom = 7.0
+
+[node name="ColorRect2" type="ColorRect" parent="PlayerAnimatedSprite_V2/Weapon2/ColorRect"]
+modulate = Color(0.913725, 0.564706, 0.298039, 1)
+offset_left = 17.0
+offset_top = 3.0
+offset_right = 26.0
+offset_bottom = 12.0
+color = Color(0.85098, 0.431373, 0.145098, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
