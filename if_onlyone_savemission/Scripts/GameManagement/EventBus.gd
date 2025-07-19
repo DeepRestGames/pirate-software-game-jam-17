@@ -4,9 +4,18 @@ extends Node
 # Add signals here to be triggered from any script
 
 
-# General events
+# Combat
 @warning_ignore("unused_signal")
 signal player_death
+
+@warning_ignore("unused_signal")
+signal player_shoot
+
+@warning_ignore("unused_signal")
+signal player_reload
+
+@warning_ignore("unused_signal")
+signal screen_shake(magnitude, duration)
 
 @warning_ignore("unused_signal")
 signal difficulty_ramp_up
@@ -15,10 +24,16 @@ signal difficulty_ramp_up
 signal difficulty_down
 
 @warning_ignore("unused_signal")
-signal screen_shake(magnitude, duration)
+signal final_boss_defeated
+
+
+# UI
+@warning_ignore("unused_signal")
+signal update_current_ammo(current_ammo)
 
 @warning_ignore("unused_signal")
-signal final_boss_defeated
+signal update_max_ammo(max_ammo)
+
 
 
 # Interactables
@@ -36,11 +51,6 @@ signal gateway_on_screen
 
 @warning_ignore("unused_signal")
 signal gateway_off_screen
-
-
-# Screen management
-@warning_ignore("unused_signal")
-signal next_level
 
 
 # Particles

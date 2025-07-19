@@ -4,17 +4,29 @@ extends CharacterBody2D
 
 @onready var player_sprite = $PlayerSprite
 
+# Shooting
 var projectile = preload("res://Scenes/Player/PlayerProjectile.tscn")
-
+var maxAmmo: int = 10
+var currentAmmo
+var reloadCooldown := 1.5
+var currentReloadCooldown : float
 
 var movement_speed: float = 300
 var looking_direction = Vector2.ZERO
 const ROTATION_SPEED: float = 2
 
 
+func _ready() -> void:
+	currentAmmo = maxAmmo
+	EventBus.emit_signal("update_max_ammo", maxAmmo)
+	EventBus.emit_signal("update_current_ammo", currentAmmo)
+
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
-		shoot()
+		if currentReloadCooldown <= 0:
+			shoot()
 
 
 func get_movement_input() -> void:
@@ -22,8 +34,16 @@ func get_movement_input() -> void:
 	velocity = input_direction * movement_speed
 
 
+func _process(delta: float) -> void:
+	if currentReloadCooldown > 0:
+		currentReloadCooldown -= delta
+		
+		if currentReloadCooldown <= 0:
+			currentAmmo = maxAmmo
+			EventBus.emit_signal("update_current_ammo", currentAmmo)
+
+
 func _physics_process(delta: float) -> void:
-	
 	var mouse_position = get_global_mouse_position()
 	looking_direction = (mouse_position - global_position).normalized()
 	
@@ -47,3 +67,15 @@ func shoot() -> void:
 	var projectile_instance = projectile.instantiate()
 	projectile_instance.global_position = position
 	get_parent().add_child(projectile_instance)
+	
+	currentAmmo -= 1
+	
+	EventBus.emit_signal("player_shoot")
+	EventBus.emit_signal("update_current_ammo", currentAmmo)
+	
+	if currentAmmo == 0:
+		reload()
+
+
+func reload() -> void:
+	currentReloadCooldown = reloadCooldown
