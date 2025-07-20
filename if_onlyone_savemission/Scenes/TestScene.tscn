@@ -16,7 +16,7 @@ size = Vector2(250, 250)
 [node name="TestScene" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.357214, 0.357214, 0.357214, 1)
+modulate = Color(0.0705882, 0.164706, 0.282353, 1)
 position = Vector2(600, 319)
 scale = Vector2(14.74, 8.58)
 texture = ExtResource("1_b5ayd")
