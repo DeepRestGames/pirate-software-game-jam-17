@@ -21,13 +21,7 @@ func _physics_process(delta: float) -> void:
 	rotation = lerp_angle(rotation, direction.angle(), ROTATION_SPEED * delta)
 	
 	velocity = direction * MOVEMENT_SPEED
-
-	if move_and_slide():
-		for i in get_slide_collision_count():
-			var collision = get_slide_collision(i)
-			
-			if collision.get_collider().is_in_group("Boomerang"):
-				take_damage()
+	move_and_slide()
 
 
 func stop_chasing_player():
@@ -40,3 +34,9 @@ func make_path() -> void:
 
 func _on_path_calculation_timer_timeout() -> void:
 	make_path()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PlayerProjectile"):
+		body.queue_free()
+		take_damage()

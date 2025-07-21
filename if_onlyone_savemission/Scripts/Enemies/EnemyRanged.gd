@@ -24,7 +24,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	current_shooting_cooldown -= delta
 	handle_line_of_sight(delta)
-	handle_collisions()
+	move_and_slide()
 
 
 func handle_line_of_sight(delta):
@@ -69,14 +69,6 @@ func move_to_next_path_position(delta):
 	velocity = direction * MOVEMENT_SPEED
 
 
-func handle_collisions():
-	if move_and_slide():
-		for i in get_slide_collision_count():
-			var collision = get_slide_collision(i)
-			if collision.get_collider().is_in_group("Boomerang"):
-				take_damage()
-
-
 func shoot():
 	var projectile_instance = projectile_scene.instantiate()
 	projectile_instance.global_position = position
@@ -93,3 +85,10 @@ func make_path() -> void:
 
 func _on_path_calculation_timer_timeout() -> void:
 	make_path()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PlayerProjectile"):
+		print("Enemy hit by projectile")
+		body.queue_free()
+		take_damage()

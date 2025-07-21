@@ -22,6 +22,7 @@ EventBus="*res://Scripts/GameManagement/EventBus.gd"
 [global_group]
 
 Player=""
+PlayerProjectile=""
 
 [input]
 
@@ -57,6 +58,7 @@ shoot={
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Environment"
 2d_physics/layer_5="PlayerProjectile"
+2d_physics/layer_6="EnemyProjectile"
 
 [rendering]
 

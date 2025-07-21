@@ -1,7 +1,7 @@
-extends StaticBody2D
+extends RigidBody2D
 
 
-@export var PROJECTILE_SPEED: float = 200
+@export var PROJECTILE_SPEED: float = 400
 var direction: Vector2
 
 
@@ -19,5 +19,5 @@ func _physics_process(delta: float) -> void:
 			pass
 			#EventBus.emit_signal("spawn_spark_particles", global_position)
 			#EventBus.emit_signal("play_projectile_deflect_sfx")
-		
-		queue_free()
+		else:
+			queue_free()

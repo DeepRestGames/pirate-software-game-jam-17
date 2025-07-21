@@ -6,6 +6,8 @@ var player: Player
 
 @onready var navigation_agent = $NavigationAgent2D as NavigationAgent2D
 
+@export var hp: int = 1
+
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
@@ -22,4 +24,8 @@ func take_damage():
 	#EventBus.emit_signal("play_thunder_sfx")
 	#EventBus.emit_signal("play_lightning_sfx", -5)
 	#EventBus.emit_signal("screen_shake")
-	queue_free()
+	
+	hp -= 1
+	if hp <= 0:
+		queue_free()
+	
