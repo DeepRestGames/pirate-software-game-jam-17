@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 
+# Graphics
 @onready var player_sprite = $PlayerSprite
 
 # Shooting
@@ -11,16 +12,22 @@ var currentAmmo
 var reloadCooldown := 1.5
 var currentReloadCooldown : float
 
+# Movement
 var movement_speed: float = 300
 var looking_direction = Vector2.ZERO
 const ROTATION_SPEED: float = 2
+
+# Consumables
+var fabricator_material_quantity: int = 0
 
 
 func _ready() -> void:
 	currentAmmo = maxAmmo
 	EventBus.emit_signal("update_max_ammo", maxAmmo)
 	EventBus.emit_signal("update_current_ammo", currentAmmo)
-
+	
+	EventBus.connect("add_fabricator_material", add_fabricator_material)
+	EventBus.connect("remove_fabricator_material", remove_fabricator_material)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -79,3 +86,13 @@ func shoot() -> void:
 
 func reload() -> void:
 	currentReloadCooldown = reloadCooldown
+
+
+func add_fabricator_material(value) -> void:
+	fabricator_material_quantity += value
+	EventBus.emit_signal("update_current_fabricator_material_count", fabricator_material_quantity)
+
+
+func remove_fabricator_material(value) -> void:
+	fabricator_material_quantity -= value
+	EventBus.emit_signal("update_current_fabricator_material_count", fabricator_material_quantity)

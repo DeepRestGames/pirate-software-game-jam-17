@@ -34,6 +34,17 @@ signal update_current_ammo(current_ammo)
 @warning_ignore("unused_signal")
 signal update_max_ammo(max_ammo)
 
+@warning_ignore("unused_signal")
+signal update_current_fabricator_material_count(value)
+
+
+# Consumables
+@warning_ignore("unused_signal")
+signal add_fabricator_material(value)
+
+@warning_ignore("unused_signal")
+signal remove_fabricator_material(value)
+
 
 
 # Interactables

@@ -14,7 +14,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
 	var next_point = navigation_agent.get_next_path_position()
 	var direction = (next_point - global_position).normalized()
 	

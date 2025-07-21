@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=4 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
+[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_qc5w2"]
+[ext_resource type="Script" uid="uid://bore17jo71by6" path="res://Scripts/UI/FabricatorMaterialCounter.gd" id="2_xaom8"]
 
 [node name="HUD" type="Control"]
 custom_minimum_size = Vector2(1152, 648)
@@ -46,3 +48,32 @@ text = "/"
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "10"
+
+[node name="FabricatorMaterialCounter" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.980903
+anchor_top = 0.0231481
+anchor_right = 0.980903
+anchor_bottom = 0.0231481
+grow_horizontal = 0
+script = ExtResource("2_xaom8")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FabricatorMaterialCounter"]
+layout_direction = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="FabricatorMaterialIcon" type="TextureRect" parent="FabricatorMaterialCounter/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="FabricatorMaterialCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2

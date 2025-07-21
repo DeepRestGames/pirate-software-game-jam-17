@@ -8,6 +8,9 @@ var player: Player
 
 @export var hp: int = 1
 
+@export var drop_rate := 1
+var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
+
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
@@ -27,5 +30,13 @@ func take_damage():
 	
 	hp -= 1
 	if hp <= 0:
+		if randf_range(0, 1) <= drop_rate:
+			drop_material()
+		
 		queue_free()
-	
+
+
+func drop_material() -> void:
+	var dropInstance = fabricatorMaterialScene.instantiate()
+	dropInstance.global_position = global_position
+	get_tree().current_scene.call_deferred("add_child", dropInstance)
