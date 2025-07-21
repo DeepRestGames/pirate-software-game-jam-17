@@ -12,6 +12,12 @@ var currentAmmo
 var reloadCooldown := 1.5
 var currentReloadCooldown : float
 
+# HP
+var currentHP: int = 3
+@export var maxHP: int = 3
+var invincibilityCooldown := .5
+var currentInvincibilityCooldown: float
+
 # Movement
 var movement_speed: float = 300
 var looking_direction = Vector2.ZERO
@@ -28,12 +34,17 @@ func _ready() -> void:
 	
 	EventBus.connect("add_fabricator_material", add_fabricator_material)
 	EventBus.connect("remove_fabricator_material", remove_fabricator_material)
+	
+	EventBus.emit_signal("update_current_hp_HUD", currentHP)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		if currentReloadCooldown <= 0:
 			shoot()
+	
+	if event.is_action_pressed("drink_potion"):
+		full_hp()
 
 
 func get_movement_input() -> void:
@@ -48,6 +59,9 @@ func _process(delta: float) -> void:
 		if currentReloadCooldown <= 0:
 			currentAmmo = maxAmmo
 			EventBus.emit_signal("update_current_ammo", currentAmmo)
+	
+	if currentInvincibilityCooldown > 0:
+		currentInvincibilityCooldown -= delta
 
 
 func _physics_process(delta: float) -> void:
@@ -65,9 +79,11 @@ func _physics_process(delta: float) -> void:
 
 
 func take_damage() -> void:
-	print("Player death")
-	EventBus.emit_signal("player_death")
-	process_mode = Node.PROCESS_MODE_DISABLED
+	if currentInvincibilityCooldown > 0:
+		return
+	
+	remove_hp(1)
+	currentInvincibilityCooldown = invincibilityCooldown
 
 
 func shoot() -> void:
@@ -95,4 +111,28 @@ func add_fabricator_material(value) -> void:
 
 func remove_fabricator_material(value) -> void:
 	fabricator_material_quantity -= value
+	
+	if fabricator_material_quantity < 0:
+		fabricator_material_quantity = 0
+	
 	EventBus.emit_signal("update_current_fabricator_material_count", fabricator_material_quantity)
+
+
+func add_hp(value) -> void:
+	currentHP += value
+	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+
+
+func remove_hp(value) -> void:
+	currentHP -= value
+	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+	
+	if currentHP <= 0:
+		print("Player death")
+		EventBus.emit_signal("player_death")
+		process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func full_hp() -> void:
+	currentHP = maxHP
+	EventBus.emit_signal("update_current_hp_HUD", currentHP)

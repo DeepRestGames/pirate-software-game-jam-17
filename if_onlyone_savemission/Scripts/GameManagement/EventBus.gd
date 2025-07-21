@@ -37,6 +37,12 @@ signal update_max_ammo(max_ammo)
 @warning_ignore("unused_signal")
 signal update_current_fabricator_material_count(value)
 
+@warning_ignore("unused_signal")
+signal update_current_hp_HUD(value)
+
+@warning_ignore("unused_signal")
+signal update_max_hp_HUD(value)
+
 
 # Consumables
 @warning_ignore("unused_signal")
