@@ -1,105 +1,158 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3nrx4ogcfxml"]
+[gd_scene load_steps=20 format=3 uid="uid://b3nrx4ogcfxml"]
 
 [ext_resource type="Script" uid="uid://44tdvccu5w1g" path="res://Scripts/Player/Player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://yt8jiybethpy" path="res://Assets/Sprites/Player.png" id="2_ude3g"]
-[ext_resource type="Script" path="res://Scripts/Player/WeaponRotation.gd" id="3_h54ih"]
+[ext_resource type="Script" uid="uid://gmoeknbubjgr" path="res://Scripts/Player/WeaponRotation.gd" id="3_h54ih"]
 [ext_resource type="Texture2D" uid="uid://cqqgt05fxr4ws" path="res://Assets/Sprites/Weapon.png" id="4_ude3g"]
 [ext_resource type="PackedScene" uid="uid://b8e4ms8gpa7de" path="res://Scenes/UI/HUD.tscn" id="5_jmcll"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbkls"]
 radius = 40.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jmcll"]
-atlas = ExtResource("2_ude3g")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4wape"]
+animation = &"Idle"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fk5o5"]
-atlas = ExtResource("2_ude3g")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ude3g"]
+animation = &"RunRight"
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4wape"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jmcll")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fk5o5")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 2.0
-}]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jmcll"]
+animation = &"RunLeft"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4wape"]
-atlas = ExtResource("4_ude3g")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_4wape"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ude3g")
+blend_point_0/pos = Vector2(1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_jmcll")
+blend_point_1/pos = Vector2(-1, 0)
+blend_mode = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t26db"]
-atlas = ExtResource("4_ude3g")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t26db"]
+advance_mode = 2
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fk5o5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4wape")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t26db")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fk5o5"]
+advance_mode = 2
+advance_expression = "!velocity"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_825xp"]
-atlas = ExtResource("2_ude3g")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_825xp"]
+advance_mode = 2
+advance_expression = "velocity"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ji083"]
-atlas = ExtResource("2_ude3g")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_t26db"]
+states/Idle/node = SubResource("AnimationNodeAnimation_4wape")
+states/Idle/position = Vector2(354.765, 199.556)
+states/Run/node = SubResource("AnimationNodeBlendSpace2D_4wape")
+states/Run/position = Vector2(354.889, 99.8025)
+states/Start/position = Vector2(164.444, 168.889)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_t26db"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fk5o5"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_825xp")]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0kmp4"]
-atlas = ExtResource("2_ude3g")
-region = Rect2(0, 32, 32, 32)
+[sub_resource type="Animation" id="Animation_t26db"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i5acl"]
-atlas = ExtResource("2_ude3g")
-region = Rect2(32, 32, 32, 32)
+[sub_resource type="Animation" id="Animation_4wape"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_epg6k"]
-atlas = ExtResource("2_ude3g")
-region = Rect2(64, 32, 32, 32)
+[sub_resource type="Animation" id="Animation_fk5o5"]
+resource_name = "RunLeft"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jmcll"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_825xp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ji083")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.5,
-"texture": SubResource("AtlasTexture_0kmp4")
-}, {
-"duration": 1.2,
-"texture": SubResource("AtlasTexture_i5acl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_epg6k")
-}],
-"loop": true,
-"name": &"Run",
-"speed": 8.0
-}]
+[sub_resource type="Animation" id="Animation_jmcll"]
+resource_name = "RunRight"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fk5o5"]
+_data = {
+&"Idle": SubResource("Animation_t26db"),
+&"RESET": SubResource("Animation_4wape"),
+&"RunLeft": SubResource("Animation_fk5o5"),
+&"RunRight": SubResource("Animation_jmcll")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 4
@@ -108,39 +161,23 @@ script = ExtResource("1_kyqiw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qbkls")
 
-[node name="PlayerAnimatedSprite_V1" type="AnimatedSprite2D" parent="."]
-visible = false
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_4wape")
-animation = &"Idle"
-autoplay = "Idle"
+texture = ExtResource("2_ude3g")
+hframes = 4
+vframes = 2
+frame = 4
 
-[node name="Weapon" type="Node2D" parent="PlayerAnimatedSprite_V1"]
-position = Vector2(11.6, 2.8)
+[node name="Weapon" type="Node2D" parent="PlayerSprite"]
+position = Vector2(13, 7)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("3_h54ih")
 
-[node name="WeaponAnimatedSprite" type="AnimatedSprite2D" parent="PlayerAnimatedSprite_V1/Weapon"]
-position = Vector2(7, -5.96046e-08)
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_fk5o5")
-
-[node name="PlayerAnimatedSprite_V2" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_jmcll")
-animation = &"Run"
-autoplay = "Idle"
-frame_progress = 0.280403
-
-[node name="Weapon2" type="Node2D" parent="PlayerAnimatedSprite_V2"]
-position = Vector2(12.8, 6.8)
-scale = Vector2(0.4, 0.4)
-script = ExtResource("3_h54ih")
-
-[node name="WeaponAnimatedSprite2" type="AnimatedSprite2D" parent="PlayerAnimatedSprite_V2/Weapon2"]
+[node name="WeaponSprite" type="Sprite2D" parent="PlayerSprite/Weapon"]
 position = Vector2(8, 0)
 scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_fk5o5")
+texture = ExtResource("4_ude3g")
+hframes = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -153,5 +190,16 @@ monitorable = false
 shape = SubResource("CircleShape2D_qbkls")
 
 [node name="HUD" parent="." instance=ExtResource("5_jmcll")]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_t26db")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Run/blend_position = Vector2(-0.188625, 0.256768)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fk5o5")
+}
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

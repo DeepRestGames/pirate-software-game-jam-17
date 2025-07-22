@@ -4,6 +4,9 @@ extends CharacterBody2D
 
 # Graphics
 @onready var player_sprite = $PlayerSprite
+@onready var animation_tree = $AnimationTree
+@onready var weapon = $PlayerSprite/Weapon
+const weapon_x_offset = 13
 
 # Shooting
 var projectile = preload("res://Scenes/Player/PlayerProjectile.tscn")
@@ -59,6 +62,7 @@ func _process(delta: float) -> void:
 		if currentReloadCooldown <= 0:
 			currentAmmo = maxAmmo
 			EventBus.emit_signal("update_current_ammo", currentAmmo)
+			EventBus.emit_signal("is_reloading", false)
 	
 	if currentInvincibilityCooldown > 0:
 		currentInvincibilityCooldown -= delta
@@ -67,6 +71,12 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	var mouse_position = get_global_mouse_position()
 	looking_direction = (mouse_position - global_position).normalized()
+	if looking_direction < Vector2.ZERO:
+		weapon.position.x = - weapon_x_offset
+	else:
+		weapon.position.x = weapon_x_offset
+	
+	animation_tree.set("parameters/Run/blend_position", looking_direction)
 	
 	get_movement_input()
 	move_and_slide()
@@ -96,6 +106,7 @@ func shoot() -> void:
 
 func reload() -> void:
 	currentReloadCooldown = reloadCooldown
+	EventBus.emit_signal("is_reloading", true)
 
 
 func add_fabricator_material(value) -> void:

@@ -12,7 +12,7 @@ signal player_death
 signal player_shoot
 
 @warning_ignore("unused_signal")
-signal player_reload
+signal is_reloading(value)
 
 @warning_ignore("unused_signal")
 signal screen_shake(magnitude, duration)
