@@ -43,7 +43,8 @@ collision_mask = 6
 script = ExtResource("1_qvbyf")
 
 [node name="ProjectileSprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+position = Vector2(0, -2.66667)
+scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_da74s")
 autoplay = "default"
 frame_progress = 0.438396
