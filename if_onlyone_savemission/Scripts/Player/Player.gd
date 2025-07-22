@@ -64,18 +64,12 @@ func _process(delta: float) -> void:
 		currentInvincibilityCooldown -= delta
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var mouse_position = get_global_mouse_position()
 	looking_direction = (mouse_position - global_position).normalized()
 	
 	get_movement_input()
 	move_and_slide()
-	
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		
-		if collision.get_collider().is_in_group("Enemies"):
-			take_damage()
 
 
 func take_damage() -> void:
@@ -130,9 +124,17 @@ func remove_hp(value) -> void:
 	if currentHP <= 0:
 		print("Player death")
 		EventBus.emit_signal("player_death")
-		process_mode = Node.PROCESS_MODE_DISABLED
+		call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 
 
 func full_hp() -> void:
 	currentHP = maxHP
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Enemies"):
+		take_damage()
+	elif body.is_in_group("EnemyProjectiles"):
+		body.queue_free()
+		take_damage()

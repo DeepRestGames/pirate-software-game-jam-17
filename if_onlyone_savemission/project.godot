@@ -23,6 +23,7 @@ EventBus="*res://Scripts/GameManagement/EventBus.gd"
 
 Player=""
 PlayerProjectile=""
+EnemyProjectiles=""
 
 [input]
 

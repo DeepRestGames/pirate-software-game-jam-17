@@ -89,6 +89,5 @@ func _on_path_calculation_timer_timeout() -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerProjectile"):
-		print("Enemy hit by projectile")
 		body.queue_free()
 		take_damage()

@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_hdy7s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w56bn"]
-radius = 80.0
+radius = 90.0
 
 [node name="EnemyRanged" type="CharacterBody2D"]
 z_index = 10
 scale = Vector2(0.6, 0.6)
 collision_layer = 2
-collision_mask = 5
+collision_mask = 4
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_1at0e")

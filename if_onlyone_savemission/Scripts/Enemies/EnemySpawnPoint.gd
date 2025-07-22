@@ -23,6 +23,9 @@ var is_difficulty_ramped_up = false
 
 @export var hp: int = 1
 
+@export var drop_rate := 1
+var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
+
 
 func _ready() -> void:
 	enemies_spawn_timer.wait_time = spawn_cooldown
@@ -95,6 +98,9 @@ func _on_enemies_spawn_timer_timeout() -> void:
 func take_damage() -> void:
 	hp -= 1
 	if hp <= 0:
+		if randf_range(0, 1) <= drop_rate:
+			drop_material()
+		
 		queue_free()
 
 
@@ -102,3 +108,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerProjectile"):
 		body.queue_free()
 		take_damage()
+
+
+func drop_material() -> void:
+	var dropInstance = fabricatorMaterialScene.instantiate()
+	dropInstance.global_position = global_position
+	get_tree().current_scene.call_deferred("add_child", dropInstance)
