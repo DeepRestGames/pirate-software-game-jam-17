@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://b3nrx4ogcfxml"]
+[gd_scene load_steps=21 format=3 uid="uid://b3nrx4ogcfxml"]
 
 [ext_resource type="Script" uid="uid://44tdvccu5w1g" path="res://Scripts/Player/Player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://yt8jiybethpy" path="res://Assets/Sprites/Player.png" id="2_ude3g"]
 [ext_resource type="Script" uid="uid://gmoeknbubjgr" path="res://Scripts/Player/WeaponRotation.gd" id="3_h54ih"]
 [ext_resource type="Texture2D" uid="uid://cqqgt05fxr4ws" path="res://Assets/Sprites/Weapon.png" id="4_ude3g"]
+[ext_resource type="Script" uid="uid://cq5figb4s3vih" path="res://Scripts/Player/ScreenShake.gd" id="5_4wape"]
 [ext_resource type="PackedScene" uid="uid://b8e4ms8gpa7de" path="res://Scenes/UI/HUD.tscn" id="5_jmcll"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbkls"]
@@ -180,6 +181,7 @@ texture = ExtResource("4_ude3g")
 hframes = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("5_4wape")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0

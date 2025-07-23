@@ -88,6 +88,7 @@ func take_damage() -> void:
 	
 	remove_hp(1)
 	currentInvincibilityCooldown = invincibilityCooldown
+	EventBus.emit_signal("screen_shake", 20, 10)
 
 
 func shoot() -> void:
