@@ -7,6 +7,7 @@ extends EnemyBase
 @export var MOVEMENT_SPEED: float = 300
 @export var ROTATION_SPEED: float = 3
 
+@onready var enemy_sprite = $RunningSprite as AnimatedSprite2D
 
 func _ready() -> void:
 	super._ready()
@@ -16,8 +17,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var next_point = navigation_agent.get_next_path_position()
 	var direction = (next_point - global_position).normalized()
-	
-	rotation = lerp_angle(rotation, direction.angle(), ROTATION_SPEED * delta)
+	if direction.x >= 0:
+		enemy_sprite.flip_h = false
+	else:
+		enemy_sprite.flip_h = true
 	
 	velocity = direction * MOVEMENT_SPEED
 	move_and_slide()

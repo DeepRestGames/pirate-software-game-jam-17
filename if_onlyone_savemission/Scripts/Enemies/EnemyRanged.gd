@@ -16,6 +16,8 @@ const trajectory_checks_offset = 80
 @export var shooting_cooldown: float = 2.5
 var current_shooting_cooldown = 0
 
+@onready var enemy_sprite = $AnimatedSprite2D as AnimatedSprite2D
+
 
 func _ready() -> void:
 	super._ready()
@@ -36,7 +38,10 @@ func handle_line_of_sight(delta):
 		if line_of_sight.get_collider().is_in_group("Player"):
 			
 			var rotation_direction = (player.global_position - global_position).normalized()
-			rotation = lerp_angle(rotation, rotation_direction.angle(), ROTATION_SPEED * delta)
+			if rotation_direction.x >= 0:
+				enemy_sprite.flip_h = false
+			else:
+				enemy_sprite.flip_h = true
 			
 			if can_shoot(player):
 				velocity = Vector2.ZERO
@@ -63,8 +68,10 @@ func can_shoot(target) -> bool:
 func move_to_next_path_position(delta):
 	var next_point = navigation_agent.get_next_path_position()
 	var direction = (next_point - global_position).normalized()
-	
-	rotation = lerp_angle(rotation, direction.angle(), ROTATION_SPEED * delta)
+	if direction.x >= 0:
+		enemy_sprite.flip_h = false
+	else:
+		enemy_sprite.flip_h = true
 	
 	velocity = direction * MOVEMENT_SPEED
 
