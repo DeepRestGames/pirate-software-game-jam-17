@@ -195,14 +195,6 @@ autostart = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 collision_mask = 5
 
-[node name="TrajectoryCheckLeft_RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-20, 0)
-collision_mask = 5
-
-[node name="TrajectoryCheckRight_RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(38, 0)
-collision_mask = 5
-
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16
