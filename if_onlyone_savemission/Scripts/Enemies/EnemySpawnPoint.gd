@@ -6,22 +6,10 @@ extends Area2D
 #@onready var enemy_spawn_buildup_particles = $EnemySpawnBuildup_GPUParticles2D as GPUParticles2D
 #@onready var enemy_spawn_flare_particles = $EnemySpawnFlare_GPUParticles2D as GPUParticles2D
 
-@export var enemy_scene: PackedScene
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var spawn_cooldown: float = 1.5
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var initial_spawn_wait_time: float = 3
-## To spawn enemies indefinitely, set this to -1
-@export var max_enemies_number: int = 3
+@export var enemy_scenes: Array[PackedScene]
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var spawn_cooldown: float = 3
 
-@export_category("Difficulty ramp up")
-@export var hard_enemy_scene: PackedScene
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var hard_spawn_cooldown: float = 0.5
-## To spawn enemies indefinitely, set this to -1
-@export var hard_max_enemies_number: int = -1
-
-var enemies_left_to_spawn: int
-var is_difficulty_ramped_up = false
-
-@export var hp: int = 1
+@export var hp: int = 5
 
 @export var drop_rate := 1
 var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
@@ -29,13 +17,6 @@ var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMateri
 
 func _ready() -> void:
 	enemies_spawn_timer.wait_time = spawn_cooldown
-	enemies_left_to_spawn = max_enemies_number
-	
-	EventBus.connect("difficulty_ramp_up", difficulty_ramp_up)
-	EventBus.connect("difficulty_down", difficulty_down)
-	
-	await get_tree().create_timer(initial_spawn_wait_time).timeout
-	enemies_spawn_timer.start()
 	
 	#if enemy_scene != null:
 		#enemy_spawn_buildup_particles.lifetime = spawn_cooldown
@@ -45,51 +26,15 @@ func _ready() -> void:
 	#enemy_spawn_buildup_particles.emitting = true
 	#enemy_spawn_buildup_particles.emitting = false
 	#enemy_spawn_flare_particles.emitting = true
-	#enemy_spawn_flare_particles.emitting = false
-
-
-func difficulty_ramp_up():
-	is_difficulty_ramped_up = true
-	enemies_left_to_spawn = hard_max_enemies_number
-	enemies_spawn_timer.wait_time = hard_spawn_cooldown
-	
-	#enemy_spawn_buildup_particles.lifetime = hard_spawn_cooldown
-	
-	enemies_spawn_timer.start()
-	#enemy_spawn_buildup_particles.restart()
-
-
-func difficulty_down():
-	is_difficulty_ramped_up = false
-	enemies_left_to_spawn = max_enemies_number
-	enemies_spawn_timer.wait_time = spawn_cooldown
-	
-	#enemy_spawn_buildup_particles.lifetime = spawn_cooldown
-	
-	enemies_spawn_timer.start()
-	#enemy_spawn_buildup_particles.restart()
+	#enemy_spawn_flare_particles.emitting = fals
 
 
 func _on_enemies_spawn_timer_timeout() -> void:
-	var enemy_instance
-	
-	if not is_difficulty_ramped_up:
-		if enemy_scene == null:
-			return
-		enemy_instance = enemy_scene.instantiate()
-	else:
-		if hard_enemy_scene == null:
-			return
-		enemy_instance = hard_enemy_scene.instantiate()
-	
+	var enemy_instance = enemy_scenes.pick_random().instantiate()
 	enemies_parent_node.add_child(enemy_instance)
 	EventBus.emit_signal("play_enemy_spawn_sound")
 	
 	#enemy_spawn_flare_particles.restart()
-	
-	enemies_left_to_spawn -= 1
-	if enemies_left_to_spawn == 0:
-		enemies_spawn_timer.stop()
 	
 	#if not enemies_spawn_timer.is_stopped():
 		#enemy_spawn_buildup_particles.restart()
@@ -114,3 +59,13 @@ func drop_material() -> void:
 	var dropInstance = fabricatorMaterialScene.instantiate()
 	dropInstance.global_position = global_position
 	get_tree().current_scene.call_deferred("add_child", dropInstance)
+
+
+func _on_aggro_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		enemies_spawn_timer.start()
+
+
+func _on_aggro_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		enemies_spawn_timer.stop()
