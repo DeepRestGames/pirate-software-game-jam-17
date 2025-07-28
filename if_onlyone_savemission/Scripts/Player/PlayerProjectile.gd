@@ -8,6 +8,7 @@ var direction: Vector2
 func _ready() -> void:
 	var mouse_position = get_global_mouse_position()
 	direction = (mouse_position - global_position).normalized()
+	rotation = direction.angle()
 
 
 func _physics_process(delta: float) -> void:
