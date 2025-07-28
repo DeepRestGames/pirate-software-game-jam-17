@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=8 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
 [ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_qc5w2"]
 [ext_resource type="Script" uid="uid://bore17jo71by6" path="res://Scripts/UI/FabricatorMaterialCounter.gd" id="2_xaom8"]
 [ext_resource type="Script" uid="uid://ykgqogdlqidp" path="res://Scripts/UI/HPCounter.gd" id="4_4bm6u"]
+[ext_resource type="Script" uid="uid://dmqrx6bkvm48c" path="res://Scripts/UI/ArrowHintsManager.gd" id="5_d2sja"]
+[ext_resource type="Script" uid="uid://ck6vs1q2qt8yj" path="res://Scripts/UI/ArrowHintShip.gd" id="5_lelo4"]
+[ext_resource type="Texture2D" uid="uid://diyaie56mgt0a" path="res://Assets/UITextures/ArrowC.png" id="5_ykvyr"]
 
 [node name="HUD" type="Control"]
 custom_minimum_size = Vector2(1152, 648)
@@ -103,3 +106,47 @@ layout_direction = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
+
+[node name="ArrowHints" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_d2sja")
+
+[node name="ArrowHintShip" type="Control" parent="ArrowHints"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_lelo4")
+
+[node name="ArrowTexture" type="TextureRect" parent="ArrowHints/ArrowHintShip"]
+modulate = Color(0.756525, 0.756525, 0, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_ykvyr")
+stretch_mode = 5
+flip_h = true
+
+[node name="DistanceLabel" type="Label" parent="ArrowHints/ArrowHintShip"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+text = "10m"
+horizontal_alignment = 1
+vertical_alignment = 1

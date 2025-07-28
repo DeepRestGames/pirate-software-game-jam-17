@@ -42,6 +42,8 @@ hframes = 13
 vframes = 2
 frame = 13
 
+[node name="SpareConsumables" type="Node2D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("3_t5ngo")]
 position = Vector2(-166, 89)
 
@@ -58,5 +60,3 @@ position = Vector2(-800, -500)
 [node name="ExpeditionGenerator" type="Node2D" parent="."]
 script = ExtResource("7_nlbeb")
 environmental_obstacles = Array[PackedScene]([ExtResource("8_vyipi"), ExtResource("9_vx5l4")])
-
-[node name="SpareConsumables" type="Node2D" parent="ExpeditionGenerator"]

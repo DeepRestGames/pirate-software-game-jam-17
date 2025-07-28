@@ -52,27 +52,13 @@ signal add_fabricator_material(value)
 signal remove_fabricator_material(value)
 
 @warning_ignore("unused_signal")
+signal send_powerup_global_position(powerup_global_position)
+
+@warning_ignore("unused_signal")
 signal add_powerup_chip(value)
 
 @warning_ignore("unused_signal")
 signal remove_powerup_chip(value)
-
-
-# Interactables
-@warning_ignore("unused_signal")
-signal send_gateway_global_position(gateway_global_position)
-
-@warning_ignore("unused_signal")
-signal start_opening_gateway
-
-@warning_ignore("unused_signal")
-signal gateway_time_left(time_left)
-
-@warning_ignore("unused_signal")
-signal gateway_on_screen
-
-@warning_ignore("unused_signal")
-signal gateway_off_screen
 
 
 # Particles

@@ -24,7 +24,7 @@ const min_number_ground_tiles = 500
 const max_number_ground_tiles = 1000
 
 # Spare consumables
-@onready var spare_consumables_parent = $SpareConsumables
+@onready var spare_consumables_parent = $"../SpareConsumables"
 var fabricator_material_scene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
 const min_number_fabricator_material = 50
 const max_number_fabricator_material = 200
@@ -139,3 +139,5 @@ func position_powerup_chip() -> void:
 		var powerup_chip_instance = powerup_chip_scene.instantiate()
 		powerup_chip_instance.global_position = Vector2(x_coordinate, y_coordinate)
 		spare_consumables_parent.add_child(powerup_chip_instance)
+		
+		EventBus.emit_signal("send_powerup_global_position", powerup_chip_instance.global_position)
