@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://blwshl3u7skae"]
+[gd_scene load_steps=9 format=3 uid="uid://blwshl3u7skae"]
 
 [ext_resource type="Script" uid="uid://cffia3f7umf6u" path="res://Scripts/Player/PlayerProjectile.gd" id="1_qvbyf"]
+[ext_resource type="Texture2D" uid="uid://byd1xs6oeu17r" path="res://Assets/Sprites/PlayerProjectileGlow.png" id="2_1dmhh"]
 [ext_resource type="Texture2D" uid="uid://b2xxr8q4018n1" path="res://Assets/Sprites/PlayerProjectile.png" id="2_qvbyf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dmhh"]
@@ -41,6 +42,12 @@ collision_layer = 16
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_qvbyf")
+
+[node name="PlayerProjectileGlow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+position = Vector2(4, -2)
+scale = Vector2(2, 2)
+texture = ExtResource("2_1dmhh")
 
 [node name="ProjectileSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2.66667)

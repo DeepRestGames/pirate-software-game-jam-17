@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4xmmv3ww4l3p"]
+[gd_scene load_steps=25 format=3 uid="uid://c4xmmv3ww4l3p"]
 
 [ext_resource type="Script" uid="uid://c47gwj7dak5j" path="res://Scripts/Enemies/EnemyRanged.gd" id="1_1at0e"]
+[ext_resource type="Texture2D" uid="uid://c0hr88pmffrkx" path="res://Assets/Sprites/RoundShadow.png" id="2_bnn53"]
 [ext_resource type="Texture2D" uid="uid://vywuqsuyrvoy" path="res://Assets/Sprites/Shooter.png" id="2_hdy7s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hdy7s"]
@@ -171,14 +172,18 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_1at0e")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.247059)
+position = Vector2(1.66667, 56.6667)
+scale = Vector2(1.394, 0.38)
+texture = ExtResource("2_bnn53")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(7.4, -13.333)
 scale = Vector2(-2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_ee8a0")
-animation = &"Death"
+animation = &"Run"
 autoplay = "Run"
-frame = 6
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_w56bn")

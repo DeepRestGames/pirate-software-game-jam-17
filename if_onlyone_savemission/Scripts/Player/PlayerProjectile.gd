@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 
-@export var PROJECTILE_SPEED: float = 400
+@export var PROJECTILE_SPEED: float = 600
 var direction: Vector2
 
 
