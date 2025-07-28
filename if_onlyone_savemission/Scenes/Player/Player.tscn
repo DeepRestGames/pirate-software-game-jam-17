@@ -187,6 +187,9 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("4_ude3g")
 hframes = 2
 
+[node name="MuzzleMarker" type="Node2D" parent="PlayerSprite/Weapon/WeaponSprite"]
+position = Vector2(4.8, -0.8)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("5_4wape")
 

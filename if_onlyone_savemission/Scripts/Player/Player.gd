@@ -6,14 +6,20 @@ extends CharacterBody2D
 @onready var player_sprite = $PlayerSprite
 @onready var animation_tree = $AnimationTree
 @onready var weapon = $PlayerSprite/Weapon
-const weapon_x_offset = 13
+@onready var muzzle_marker = $PlayerSprite/Weapon/WeaponSprite/MuzzleMarker
+#@onready var shooting_animation = $PlayerSprite/Weapon/WeaponSprite/ShootingAnimation
+const weapon_x_offset = 15
+const weapon_muzzle_x_offset = 10
 
 # Shooting
 var projectile = preload("res://Scenes/Player/PlayerProjectile.tscn")
+var shooting_animation = preload("res://Scenes/Player/PlayerShootingAnimation.tscn")
 var maxAmmo: int = 10
 var currentAmmo
 var reloadCooldown := 1.5
 var currentReloadCooldown : float
+
+
 
 # HP
 var currentHP: int = 3
@@ -83,10 +89,12 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	var mouse_position = get_global_mouse_position()
 	looking_direction = (mouse_position - global_position).normalized()
-	if looking_direction < Vector2.ZERO:
+	if looking_direction.x < 0:
 		weapon.position.x = - weapon_x_offset
+		weapon.scale.y = -0.4
 	else:
 		weapon.position.x = weapon_x_offset
+		weapon.scale.y = 0.4
 	
 	animation_tree.set("parameters/Run/blend_position", looking_direction)
 	
@@ -105,8 +113,10 @@ func take_damage() -> void:
 
 func shoot() -> void:
 	var projectile_instance = projectile.instantiate()
-	projectile_instance.global_position = position
+	projectile_instance.global_position = muzzle_marker.global_position
 	get_parent().add_child(projectile_instance)
+	muzzle_marker.add_child(shooting_animation.instantiate())
+	
 	
 	currentAmmo -= 1
 	
