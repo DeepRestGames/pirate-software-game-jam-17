@@ -41,6 +41,12 @@ signal update_current_fabricator_material_count(value)
 signal update_current_powerup_chips_count(value)
 
 @warning_ignore("unused_signal")
+signal update_current_potions_count(value)
+
+@warning_ignore("unused_signal")
+signal update_current_bombs_count(value)
+
+@warning_ignore("unused_signal")
 signal update_current_hp_HUD(value)
 
 @warning_ignore("unused_signal")
@@ -62,6 +68,18 @@ signal add_powerup_chip(value)
 
 @warning_ignore("unused_signal")
 signal remove_powerup_chip(value)
+
+@warning_ignore("unused_signal")
+signal add_potion(value)
+
+@warning_ignore("unused_signal")
+signal remove_potion(value)
+
+@warning_ignore("unused_signal")
+signal add_bomb(value)
+
+@warning_ignore("unused_signal")
+signal remove_bomb(value)
 
 
 # Particles

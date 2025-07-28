@@ -29,6 +29,8 @@ const ROTATION_SPEED: float = 2
 # Consumables
 var fabricator_material_quantity: int = 0
 var powerup_chips_quantity: int = 0
+var potions_quantity: int = 0
+var bombs_quantity: int = 0
 
 
 func _ready() -> void:
@@ -42,6 +44,12 @@ func _ready() -> void:
 	EventBus.connect("add_powerup_chip", add_powerup_chip)
 	EventBus.connect("remove_powerup_chip", remove_powerup_chip)
 	
+	EventBus.connect("add_potion", add_potion)
+	EventBus.connect("remove_potion", remove_potion)
+	
+	EventBus.connect("add_bomb", add_bomb)
+	EventBus.connect("remove_bomb", remove_bomb)
+	
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
 
 
@@ -51,7 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			shoot()
 	
 	if event.is_action_pressed("drink_potion"):
-		full_hp()
+		heal_hp()
 
 
 func get_movement_input() -> void:
@@ -142,6 +150,34 @@ func remove_powerup_chip(value) -> void:
 	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
 
 
+func add_potion(value) -> void:
+	potions_quantity += value
+	EventBus.emit_signal("update_current_potions_count", potions_quantity)
+
+
+func remove_potion(value) -> void:
+	if value > potions_quantity:
+		printerr("Not enough potions!")
+		return
+	
+	potions_quantity -= value
+	EventBus.emit_signal("update_current_potions_count", potions_quantity)
+
+
+func add_bomb(value) -> void:
+	bombs_quantity += value
+	EventBus.emit_signal("update_current_bombs_count", bombs_quantity)
+
+
+func remove_bomb(value) -> void:
+	if value > bombs_quantity:
+		printerr("Not enough bombs!")
+		return
+	
+	bombs_quantity -= value
+	EventBus.emit_signal("update_current_bombs_count", bombs_quantity)
+
+
 func add_hp(value) -> void:
 	currentHP += value
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
@@ -157,9 +193,14 @@ func remove_hp(value) -> void:
 		call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 
 
-func full_hp() -> void:
-	currentHP = maxHP
+func heal_hp() -> void:
+	if currentHP == maxHP or potions_quantity == 0:
+		return
+	
+	currentHP += 1
+	potions_quantity -= 1
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+	EventBus.emit_signal("update_current_potions_count", potions_quantity)
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
