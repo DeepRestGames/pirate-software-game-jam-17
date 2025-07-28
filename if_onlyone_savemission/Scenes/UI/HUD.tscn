@@ -1,0 +1,247 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8e4ms8gpa7de"]
+
+[ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
+[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_qc5w2"]
+[ext_resource type="Script" uid="uid://bore17jo71by6" path="res://Scripts/UI/FabricatorMaterialCounter.gd" id="2_xaom8"]
+[ext_resource type="Script" uid="uid://ykgqogdlqidp" path="res://Scripts/UI/HPCounter.gd" id="4_4bm6u"]
+[ext_resource type="Script" uid="uid://blctfngfvyhaa" path="res://Scripts/UI/PowerupChipsCounter.gd" id="4_d2sja"]
+[ext_resource type="Script" uid="uid://dmqrx6bkvm48c" path="res://Scripts/UI/ArrowHintsManager.gd" id="5_d2sja"]
+[ext_resource type="Script" uid="uid://ck6vs1q2qt8yj" path="res://Scripts/UI/ArrowHintShip.gd" id="5_lelo4"]
+[ext_resource type="Texture2D" uid="uid://diyaie56mgt0a" path="res://Assets/UITextures/ArrowC.png" id="5_ykvyr"]
+[ext_resource type="Script" uid="uid://dac0rqgt8qakd" path="res://Scripts/UI/PotionsCounter.gd" id="9_i4i0y"]
+[ext_resource type="Script" uid="uid://dkten4p1hdo57" path="res://Scripts/UI/BombsCounter.gd" id="10_yenib"]
+
+[node name="HUD" type="Control"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AmmoCounter" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.980903
+anchor_top = 0.976852
+anchor_right = 0.980903
+anchor_bottom = 0.976852
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_omqfp")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AmmoCounter"]
+layout_mode = 1
+offset_left = -44.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrentAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "5"
+
+[node name="Separator" type="Label" parent="AmmoCounter/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "/"
+
+[node name="MaxAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "10"
+
+[node name="FabricatorMaterialCounter" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.980903
+anchor_top = 0.0231481
+anchor_right = 0.980903
+anchor_bottom = 0.0231481
+grow_horizontal = 0
+script = ExtResource("2_xaom8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FabricatorMaterialCounter"]
+layout_direction = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="FabricatorMaterialIcon" type="TextureRect" parent="FabricatorMaterialCounter/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="FabricatorMaterialCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="PowerupChipsCounter" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.980903
+anchor_top = 0.0231481
+anchor_right = 0.980903
+anchor_bottom = 0.0231481
+offset_left = -0.000244141
+offset_top = 55.0
+offset_right = -0.000244141
+offset_bottom = 55.0
+grow_horizontal = 0
+script = ExtResource("4_d2sja")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PowerupChipsCounter"]
+layout_direction = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="PowerupChipIcon" type="TextureRect" parent="PowerupChipsCounter/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="PowerupChipsCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="HPCounter" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.0190972
+anchor_top = 0.0231481
+anchor_right = 0.0190972
+anchor_bottom = 0.0231481
+script = ExtResource("4_4bm6u")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HPCounter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="HPIcon" type="TextureRect" parent="HPCounter/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="HPCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="ArrowHints" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_d2sja")
+
+[node name="ArrowHintShip" type="Control" parent="ArrowHints"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_lelo4")
+
+[node name="ArrowTexture" type="TextureRect" parent="ArrowHints/ArrowHintShip"]
+modulate = Color(0.756525, 0.756525, 0, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_ykvyr")
+stretch_mode = 5
+flip_h = true
+
+[node name="DistanceLabel" type="Label" parent="ArrowHints/ArrowHintShip"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+text = "10m"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PotionsCounter" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -128.0
+offset_right = 22.0
+offset_bottom = -128.0
+grow_vertical = 0
+script = ExtResource("9_i4i0y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PotionsCounter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="PotionlIcon" type="TextureRect" parent="PotionsCounter/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="PotionsCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="BombsCounter" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -68.0
+offset_right = 60.0
+offset_bottom = -68.0
+grow_vertical = 0
+script = ExtResource("10_yenib")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BombsCounter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="BomblIcon" type="TextureRect" parent="BombsCounter/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="BombsCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2

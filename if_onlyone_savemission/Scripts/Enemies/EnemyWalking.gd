@@ -7,6 +7,7 @@ extends EnemyBase
 @export var MOVEMENT_SPEED: float = 300
 @export var ROTATION_SPEED: float = 3
 
+@onready var enemy_sprite = $RunningSprite as AnimatedSprite2D
 
 func _ready() -> void:
 	super._ready()
@@ -14,20 +15,15 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
 	var next_point = navigation_agent.get_next_path_position()
 	var direction = (next_point - global_position).normalized()
-	
-	rotation = lerp_angle(rotation, direction.angle(), ROTATION_SPEED * delta)
+	if direction.x >= 0:
+		enemy_sprite.flip_h = false
+	else:
+		enemy_sprite.flip_h = true
 	
 	velocity = direction * MOVEMENT_SPEED
-
-	if move_and_slide():
-		for i in get_slide_collision_count():
-			var collision = get_slide_collision(i)
-			
-			if collision.get_collider().is_in_group("Boomerang"):
-				take_damage()
+	move_and_slide()
 
 
 func stop_chasing_player():
@@ -40,3 +36,9 @@ func make_path() -> void:
 
 func _on_path_calculation_timer_timeout() -> void:
 	make_path()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PlayerProjectile"):
+		body.queue_free()
+		take_damage()

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyhrl75vxkhcv"]
+
+[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="1_qwq7y"]
+[ext_resource type="Script" uid="uid://coxwde6ryrm0e" path="res://Scripts/Environment/Obstacle.gd" id="1_uogot"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uogot"]
+radius = 70.0
+
+[node name="Obstacle" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_uogot")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.298039, 0.298039, 1)
+texture = ExtResource("1_qwq7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uogot")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_uogot")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

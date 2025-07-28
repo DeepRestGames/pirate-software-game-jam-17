@@ -1,5 +1,5 @@
 class_name EnemyRangedStatic
-extends StaticBody2D
+extends Area2D
 
 
 var player: Player
@@ -10,6 +10,11 @@ var player: Player
 
 @export var shooting_cooldown: float = 2.5
 var current_shooting_cooldown = 0
+
+@export var hp: int = 5
+
+@export var drop_rate := 1
+var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
 
 
 func _ready() -> void:
@@ -35,3 +40,24 @@ func shoot():
 	var projectile_instance = projectile_scene.instantiate()
 	projectile_instance.global_position = position
 	get_parent().add_child(projectile_instance)
+
+
+func take_damage() -> void:
+	hp -= 1
+	if hp <= 0:
+		if randf_range(0, 1) <= drop_rate:
+			drop_material()
+		
+		queue_free()
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PlayerProjectile"):
+		body.queue_free()
+		take_damage()
+
+
+func drop_material() -> void:
+	var dropInstance = fabricatorMaterialScene.instantiate()
+	dropInstance.global_position = global_position
+	get_tree().current_scene.call_deferred("add_child", dropInstance)

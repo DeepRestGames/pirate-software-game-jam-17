@@ -4,9 +4,18 @@ extends Node
 # Add signals here to be triggered from any script
 
 
-# General events
+# Combat
 @warning_ignore("unused_signal")
 signal player_death
+
+@warning_ignore("unused_signal")
+signal player_shoot
+
+@warning_ignore("unused_signal")
+signal is_reloading(value)
+
+@warning_ignore("unused_signal")
+signal screen_shake(magnitude, duration)
 
 @warning_ignore("unused_signal")
 signal difficulty_ramp_up
@@ -15,32 +24,62 @@ signal difficulty_ramp_up
 signal difficulty_down
 
 @warning_ignore("unused_signal")
-signal screen_shake(magnitude, duration)
-
-@warning_ignore("unused_signal")
 signal final_boss_defeated
 
 
-# Interactables
+# UI
 @warning_ignore("unused_signal")
-signal send_gateway_global_position(gateway_global_position)
+signal update_current_ammo(current_ammo)
 
 @warning_ignore("unused_signal")
-signal start_opening_gateway
+signal update_max_ammo(max_ammo)
 
 @warning_ignore("unused_signal")
-signal gateway_time_left(time_left)
+signal update_current_fabricator_material_count(value)
 
 @warning_ignore("unused_signal")
-signal gateway_on_screen
+signal update_current_powerup_chips_count(value)
 
 @warning_ignore("unused_signal")
-signal gateway_off_screen
+signal update_current_potions_count(value)
 
-
-# Screen management
 @warning_ignore("unused_signal")
-signal next_level
+signal update_current_bombs_count(value)
+
+@warning_ignore("unused_signal")
+signal update_current_hp_HUD(value)
+
+@warning_ignore("unused_signal")
+signal update_max_hp_HUD(value)
+
+
+# Consumables
+@warning_ignore("unused_signal")
+signal add_fabricator_material(value)
+
+@warning_ignore("unused_signal")
+signal remove_fabricator_material(value)
+
+@warning_ignore("unused_signal")
+signal send_powerup_global_position(powerup_global_position)
+
+@warning_ignore("unused_signal")
+signal add_powerup_chip(value)
+
+@warning_ignore("unused_signal")
+signal remove_powerup_chip(value)
+
+@warning_ignore("unused_signal")
+signal add_potion(value)
+
+@warning_ignore("unused_signal")
+signal remove_potion(value)
+
+@warning_ignore("unused_signal")
+signal add_bomb(value)
+
+@warning_ignore("unused_signal")
+signal remove_bomb(value)
 
 
 # Particles
