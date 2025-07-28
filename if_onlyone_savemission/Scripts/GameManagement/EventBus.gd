@@ -51,6 +51,11 @@ signal add_fabricator_material(value)
 @warning_ignore("unused_signal")
 signal remove_fabricator_material(value)
 
+@warning_ignore("unused_signal")
+signal add_powerup_chip(value)
+
+@warning_ignore("unused_signal")
+signal remove_powerup_chip(value)
 
 
 # Interactables

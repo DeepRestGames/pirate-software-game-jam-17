@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="if_onlyOne_saveMission"
-run/main_scene="uid://c45w2d26ukahn"
+run/main_scene="uid://bgw3vnrt1kuhu"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
