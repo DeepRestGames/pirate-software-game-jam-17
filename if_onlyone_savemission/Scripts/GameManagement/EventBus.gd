@@ -38,6 +38,9 @@ signal update_max_ammo(max_ammo)
 signal update_current_fabricator_material_count(value)
 
 @warning_ignore("unused_signal")
+signal update_current_powerup_chips_count(value)
+
+@warning_ignore("unused_signal")
 signal update_current_hp_HUD(value)
 
 @warning_ignore("unused_signal")

@@ -28,6 +28,7 @@ const ROTATION_SPEED: float = 2
 
 # Consumables
 var fabricator_material_quantity: int = 0
+var powerup_chips_quantity: int = 0
 
 
 func _ready() -> void:
@@ -37,6 +38,9 @@ func _ready() -> void:
 	
 	EventBus.connect("add_fabricator_material", add_fabricator_material)
 	EventBus.connect("remove_fabricator_material", remove_fabricator_material)
+	
+	EventBus.connect("add_powerup_chip", add_powerup_chip)
+	EventBus.connect("remove_powerup_chip", remove_powerup_chip)
 	
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
 
@@ -116,12 +120,26 @@ func add_fabricator_material(value) -> void:
 
 
 func remove_fabricator_material(value) -> void:
+	if value > fabricator_material_quantity:
+		printerr("Not enough fabricator material!")
+		return
+	
 	fabricator_material_quantity -= value
-	
-	if fabricator_material_quantity < 0:
-		fabricator_material_quantity = 0
-	
 	EventBus.emit_signal("update_current_fabricator_material_count", fabricator_material_quantity)
+
+
+func add_powerup_chip(value) -> void:
+	powerup_chips_quantity += value
+	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
+
+
+func remove_powerup_chip(value) -> void:
+	if value > powerup_chips_quantity:
+		printerr("Not enough powerup chips!")
+		return
+	
+	powerup_chips_quantity -= value
+	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
 
 
 func add_hp(value) -> void:
