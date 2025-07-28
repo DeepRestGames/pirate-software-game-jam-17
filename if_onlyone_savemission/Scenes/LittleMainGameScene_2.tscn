@@ -1,14 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgw3vnrt1kuhu"]
+[gd_scene load_steps=12 format=3 uid="uid://uyxpydjqq0nn"]
 
-[ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="1_aisys"]
-[ext_resource type="Texture2D" uid="uid://c24541cla84fj" path="res://Assets/Sprites/Ship.png" id="2_ptqah"]
-[ext_resource type="PackedScene" uid="uid://b3nrx4ogcfxml" path="res://Scenes/Player/Player.tscn" id="3_t5ngo"]
-[ext_resource type="Script" uid="uid://c8p7jaqynocev" path="res://Scripts/GameManagement/DifficultyManager.gd" id="4_hjrmh"]
-[ext_resource type="PackedScene" uid="uid://c4xmmv3ww4l3p" path="res://Scenes/Enemies/EnemyRanged.tscn" id="5_kcb6y"]
-[ext_resource type="PackedScene" uid="uid://1jxgf3akb6ir" path="res://Scenes/Enemies/EnemyWalking.tscn" id="6_wc7sd"]
-[ext_resource type="Script" uid="uid://d1h5f5634ob5s" path="res://Scripts/GameManagement/ExpeditionGenerator.gd" id="7_nlbeb"]
-[ext_resource type="PackedScene" uid="uid://dyhrl75vxkhcv" path="res://Scenes/Environment/Obstacle.tscn" id="8_vyipi"]
-[ext_resource type="PackedScene" uid="uid://dc8x5rtjnlaa3" path="res://Scenes/Environment/ObstacleWithDrop.tscn" id="9_vx5l4"]
+[ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="1_8c7kt"]
+[ext_resource type="Texture2D" uid="uid://c24541cla84fj" path="res://Assets/Sprites/Ship.png" id="2_k0pq6"]
+[ext_resource type="PackedScene" uid="uid://b3nrx4ogcfxml" path="res://Scenes/Player/Player.tscn" id="3_wyx2f"]
+[ext_resource type="Script" uid="uid://c8p7jaqynocev" path="res://Scripts/GameManagement/DifficultyManager.gd" id="4_ou4kl"]
+[ext_resource type="PackedScene" uid="uid://c4xmmv3ww4l3p" path="res://Scenes/Enemies/EnemyRanged.tscn" id="5_8umxw"]
+[ext_resource type="PackedScene" uid="uid://1jxgf3akb6ir" path="res://Scenes/Enemies/EnemyWalking.tscn" id="6_e6ui8"]
+[ext_resource type="Script" uid="uid://d1h5f5634ob5s" path="res://Scripts/GameManagement/ExpeditionGenerator.gd" id="7_7gdlg"]
+[ext_resource type="PackedScene" uid="uid://dyhrl75vxkhcv" path="res://Scenes/Environment/Obstacle.tscn" id="8_ocq3j"]
+[ext_resource type="PackedScene" uid="uid://dc8x5rtjnlaa3" path="res://Scenes/Environment/ObstacleWithDrop.tscn" id="9_6lik2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cp132"]
 vertices = PackedVector2Array(20054, -19893, 20011, 19865, -19999, 19867, -20054, -19942)
@@ -28,7 +28,7 @@ point_count = 4
 [node name="GroundSprite" type="Sprite2D" parent="GroundFeatures"]
 modulate = Color(0.0705882, 0.164706, 0.282353, 1)
 scale = Vector2(100, 100)
-texture = ExtResource("1_aisys")
+texture = ExtResource("1_8c7kt")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_cp132")
@@ -37,19 +37,19 @@ navigation_polygon = SubResource("NavigationPolygon_cp132")
 
 [node name="Ship" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
-texture = ExtResource("2_ptqah")
+texture = ExtResource("2_k0pq6")
 hframes = 13
 vframes = 2
 frame = 13
 
 [node name="SpareConsumables" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("3_t5ngo")]
+[node name="Player" parent="." instance=ExtResource("3_wyx2f")]
 position = Vector2(-166, 89)
 
 [node name="DifficultyManager" type="Node2D" parent="Player"]
-script = ExtResource("4_hjrmh")
-enemy_scenes = Array[PackedScene]([ExtResource("5_kcb6y"), ExtResource("6_wc7sd")])
+script = ExtResource("4_ou4kl")
+enemy_scenes = Array[PackedScene]([ExtResource("5_8umxw"), ExtResource("6_e6ui8")])
 
 [node name="EnemySpawningPath" type="Path2D" parent="Player/DifficultyManager"]
 curve = SubResource("Curve2D_qla6v")
@@ -58,5 +58,5 @@ curve = SubResource("Curve2D_qla6v")
 position = Vector2(-800, -500)
 
 [node name="ExpeditionGenerator" type="Node2D" parent="."]
-script = ExtResource("7_nlbeb")
-environmental_obstacles = Array[PackedScene]([ExtResource("8_vyipi"), ExtResource("9_vx5l4")])
+script = ExtResource("7_7gdlg")
+environmental_obstacles = Array[PackedScene]([ExtResource("8_ocq3j"), ExtResource("9_6lik2")])

@@ -102,7 +102,7 @@ func generate_ground_tile() -> void:
 	tile_sprite.texture = ground_tiles_texture
 	tile_sprite.hframes = 6
 	tile_sprite.frame = randi_range(0, 5)
-	tile_sprite.modulate.v = randf_range(0, 1)
+	tile_sprite.modulate.v = randf_range(0.6, 0.8)
 	
 	var x_coordinate = randf_range(-map_size.x, map_size.x)
 	var y_coordinate = randf_range(-map_size.y, map_size.y)
