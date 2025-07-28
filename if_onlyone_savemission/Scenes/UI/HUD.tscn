@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=18 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
 [ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_qc5w2"]
@@ -10,6 +10,26 @@
 [ext_resource type="Texture2D" uid="uid://diyaie56mgt0a" path="res://Assets/UITextures/ArrowC.png" id="5_ykvyr"]
 [ext_resource type="Script" uid="uid://dac0rqgt8qakd" path="res://Scripts/UI/PotionsCounter.gd" id="9_i4i0y"]
 [ext_resource type="Script" uid="uid://dkten4p1hdo57" path="res://Scripts/UI/BombsCounter.gd" id="10_yenib"]
+[ext_resource type="Script" uid="uid://dvxby01eopx46" path="res://Scripts/UI/InteractionPrompt.gd" id="11_pydgx"]
+[ext_resource type="Texture2D" uid="uid://c57y1q7g0c0b0" path="res://Assets/UITextures/E_Button.png" id="12_eebq5"]
+[ext_resource type="Script" uid="uid://6q37llehwjjk" path="res://Scripts/Ship/ShipMenu.gd" id="13_18ujm"]
+[ext_resource type="Script" uid="uid://qccpvk1auj7o" path="res://Scripts/Ship/FabricatorPanel.gd" id="14_jt2rc"]
+[ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eebq5"]
+bg_color = Color(0.122067, 0.122067, 0.122067, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18ujm"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="HUD" type="Control"]
 custom_minimum_size = Vector2(1152, 648)
@@ -57,6 +77,7 @@ theme_override_font_sizes/font_size = 32
 text = "10"
 
 [node name="FabricatorMaterialCounter" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchor_left = 0.980903
 anchor_top = 0.0231481
@@ -85,6 +106,7 @@ text = "0"
 horizontal_alignment = 2
 
 [node name="PowerupChipsCounter" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchor_left = 0.980903
 anchor_top = 0.0231481
@@ -186,7 +208,13 @@ text = "10m"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ArrowHintPowerups" type="Control" parent="ArrowHints"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="PotionsCounter" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -217,6 +245,7 @@ text = "0"
 horizontal_alignment = 2
 
 [node name="BombsCounter" type="Control" parent="."]
+process_mode = 3
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -245,3 +274,255 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
+
+[node name="InteractionPrompt" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("11_pydgx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InteractionPrompt"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.5
+offset_top = -152.0
+offset_right = 47.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="InteractionPrompt/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_eebq5")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="InteractionPrompt/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "INTERACT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShipMenu" type="Control" parent="."]
+process_mode = 3
+visible = false
+z_index = 100
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_18ujm")
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Panel" parent="ShipMenu"]
+custom_minimum_size = Vector2(600, 500)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.239583
+anchor_top = 0.114198
+anchor_right = 0.760417
+anchor_bottom = 0.885802
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eebq5")
+metadata/_edit_use_anchors_ = true
+
+[node name="PowerupsPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 450)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0583333
+anchor_top = 0.05
+anchor_right = 0.475
+anchor_bottom = 0.95
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+metadata/_edit_use_anchors_ = true
+
+[node name="FabricatorPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.05
+anchor_right = 0.941667
+anchor_bottom = 0.45
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+script = ExtResource("14_jt2rc")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel"]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelTitle" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
+layout_mode = 2
+text = "FABRICATOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PotionCrafting" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PotionIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 3
+
+[node name="CurrentPotionsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
+layout_mode = 2
+text = "x0"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
+layout_mode = 2
+alignment = 1
+
+[node name="CraftPotionButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer"]
+modulate = Color(0, 0.65441, 5.77569e-07, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "+"
+icon = ExtResource("15_pd044")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer"]
+layout_mode = 2
+
+[node name="FabricatorMaterialIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 3
+
+[node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="BombsCrafting" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BombIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 3
+
+[node name="CurrentBombsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
+layout_mode = 2
+text = "x0"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
+layout_mode = 2
+alignment = 1
+
+[node name="CraftBombButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer"]
+modulate = Color(0, 0.65441, 5.77569e-07, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "+"
+icon = ExtResource("15_pd044")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer"]
+layout_mode = 2
+
+[node name="FabricatorMaterialIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 3
+
+[node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="MoveShipPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.5
+anchor_right = 0.941667
+anchor_bottom = 0.7
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveShipButton" type="Button" parent="ShipMenu/Background/MoveShipPanel"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.25
+anchor_right = 0.8
+anchor_bottom = 0.75
+offset_left = 28.0
+offset_top = 9.5
+offset_right = -28.0
+offset_bottom = -9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "MOVE SHIP"
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitShipPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.75
+anchor_right = 0.941667
+anchor_bottom = 0.95
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitShipButton" type="Button" parent="ShipMenu/Background/ExitShipPanel"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.25
+anchor_right = 0.8
+anchor_bottom = 0.75
+offset_left = 28.0
+offset_top = 9.5
+offset_right = -28.0
+offset_bottom = -9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "EXIT SHIP"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="visibility_changed" from="ShipMenu/Background/FabricatorPanel" to="ShipMenu/Background/FabricatorPanel" method="_on_visibility_changed"]
+[connection signal="pressed" from="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/CraftPotionButton" to="ShipMenu/Background/FabricatorPanel" method="_on_craft_potion_button_pressed"]
+[connection signal="pressed" from="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/CraftBombButton" to="ShipMenu/Background/FabricatorPanel" method="_on_craft_bomb_button_pressed"]
+[connection signal="pressed" from="ShipMenu/Background/MoveShipPanel/MoveShipButton" to="ShipMenu" method="_on_move_ship_button_pressed"]
+[connection signal="pressed" from="ShipMenu/Background/ExitShipPanel/ExitShipButton" to="ShipMenu" method="_on_exit_ship_button_pressed"]

@@ -53,6 +53,17 @@ signal update_current_hp_HUD(value)
 signal update_max_hp_HUD(value)
 
 
+# Ship
+@warning_ignore("unused_signal")
+signal show_ship_interaction_prompt(value)
+
+@warning_ignore("unused_signal")
+signal show_ship_menu(value)
+
+@warning_ignore("unused_signal")
+signal move_ship
+
+
 # Consumables
 @warning_ignore("unused_signal")
 signal add_fabricator_material(value)
@@ -62,6 +73,9 @@ signal remove_fabricator_material(value)
 
 @warning_ignore("unused_signal")
 signal send_powerup_global_position(powerup_global_position)
+
+@warning_ignore("unused_signal")
+signal clear_powerup_positions
 
 @warning_ignore("unused_signal")
 signal add_powerup_chip(value)

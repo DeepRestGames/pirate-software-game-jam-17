@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://dyhaxeflnkmln"]
+
+[ext_resource type="Script" uid="uid://br2vknu1o14p8" path="res://Scripts/Ship/Ship.gd" id="1_1l6c1"]
+[ext_resource type="Texture2D" uid="uid://c24541cla84fj" path="res://Assets/Sprites/Ship.png" id="1_f4yyi"]
+
+[sub_resource type="Animation" id="Animation_1l6c1"]
+resource_name = "Appear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [25, 24, 23, 22, 21]
+}
+
+[sub_resource type="Animation" id="Animation_wtp3e"]
+resource_name = "IdleInvisible"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_f4yyi"]
+resource_name = "IdleVisible"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_r5v3t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [25]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtp3e"]
+_data = {
+&"Appear": SubResource("Animation_1l6c1"),
+&"IdleInvisible": SubResource("Animation_wtp3e"),
+&"IdleVisible": SubResource("Animation_f4yyi"),
+&"RESET": SubResource("Animation_r5v3t")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1hxw"]
+radius = 350.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f4yyi"]
+radius = 100.0
+
+[node name="Ship" type="Node2D"]
+script = ExtResource("1_1l6c1")
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_f4yyi")
+hframes = 13
+vframes = 2
+frame = 25
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wtp3e")
+}
+
+[node name="ShipVisibleArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipVisibleArea"]
+shape = SubResource("CircleShape2D_x1hxw")
+
+[node name="ShipInteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShipInteractionArea"]
+shape = SubResource("CircleShape2D_f4yyi")
+
+[connection signal="body_entered" from="ShipVisibleArea" to="." method="_on_ship_visible_area_body_entered"]
+[connection signal="body_exited" from="ShipVisibleArea" to="." method="_on_ship_visible_area_body_exited"]
+[connection signal="body_entered" from="ShipInteractionArea" to="." method="_on_ship_interaction_area_body_entered"]
+[connection signal="body_exited" from="ShipInteractionArea" to="." method="_on_ship_interaction_area_body_exited"]

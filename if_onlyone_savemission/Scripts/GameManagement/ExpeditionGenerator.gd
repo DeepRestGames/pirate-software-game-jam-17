@@ -41,6 +41,8 @@ func _ready() -> void:
 	map_size = Vector2(map_size_x, map_size_y)
 	
 	generate_new_expedition()
+	
+	EventBus.connect("move_ship", move_ship)
 
 
 func generate_new_expedition() -> void:
@@ -141,3 +143,23 @@ func position_powerup_chip() -> void:
 		spare_consumables_parent.add_child(powerup_chip_instance)
 		
 		EventBus.emit_signal("send_powerup_global_position", powerup_chip_instance.global_position)
+
+
+func clear_procedural_generated_entities() -> void:
+	for i in navigation_region.get_children():
+		i.queue_free()
+	
+	for i in enemies_parent.get_children():
+		i.queue_free()
+	
+	for i in ground_features_parent.get_children():
+		i.queue_free()
+	
+	for i in spare_consumables_parent.get_children():
+		i.queue_free()
+	EventBus.emit_signal("clear_powerup_positions")
+
+
+func move_ship() -> void:
+	clear_procedural_generated_entities()
+	generate_new_expedition()
