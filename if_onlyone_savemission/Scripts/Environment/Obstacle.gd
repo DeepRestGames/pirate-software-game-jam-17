@@ -13,5 +13,6 @@ func take_damage() -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerProjectile"):
-		body.queue_free()
+		if body.has_method("on_impact"):
+			body.on_impact()
 		take_damage()

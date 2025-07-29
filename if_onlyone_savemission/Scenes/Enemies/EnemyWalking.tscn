@@ -110,7 +110,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6hjse"]
-radius = 100.0
+radius = 78.8586
 
 [node name="EnemyWalking" type="CharacterBody2D" groups=["Enemies"]]
 z_index = 10
@@ -142,6 +142,7 @@ rotation = -1.57079
 texture = ExtResource("2_5ghqi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.35294, 10.5882)
 shape = SubResource("CircleShape2D_6hjse")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -160,6 +161,7 @@ collision_mask = 16
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2.35294, 10.5882)
 shape = SubResource("CircleShape2D_6hjse")
 
 [connection signal="timeout" from="PathCalculationTimer" to="." method="_on_path_calculation_timer_timeout"]
