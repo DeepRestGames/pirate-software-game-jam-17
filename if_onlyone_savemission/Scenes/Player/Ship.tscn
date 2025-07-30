@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwd03v2wnr07c"]
+[gd_scene load_steps=20 format=3 uid="uid://cwd03v2wnr07c"]
 
 [ext_resource type="Texture2D" uid="uid://c24541cla84fj" path="res://Assets/Sprites/Ship.png" id="1_c8mii"]
+[ext_resource type="Texture2D" uid="uid://c0hr88pmffrkx" path="res://Assets/Sprites/RoundShadow.png" id="2_svleg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svleg"]
 atlas = ExtResource("1_c8mii")
@@ -128,9 +129,16 @@ animations = [{
 }]
 
 [node name="Ship" type="Node2D"]
+scale = Vector2(1.5, 1.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_m6121")
 animation = &"InvisibleIdle"
 autoplay = "InvisibleIdle"
 frame_progress = 0.49955
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.247059)
+position = Vector2(0, 28)
+scale = Vector2(0.513672, 0.140025)
+texture = ExtResource("2_svleg")
