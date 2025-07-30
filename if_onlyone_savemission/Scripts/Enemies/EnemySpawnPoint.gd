@@ -3,6 +3,7 @@ extends Area2D
 
 @onready var enemies_parent_node = $EnemiesParentNode
 @onready var enemies_spawn_timer = $EnemiesSpawnTimer as Timer
+@onready var spawn_animation = $SpawnPointSprite
 #@onready var enemy_spawn_buildup_particles = $EnemySpawnBuildup_GPUParticles2D as GPUParticles2D
 #@onready var enemy_spawn_flare_particles = $EnemySpawnFlare_GPUParticles2D as GPUParticles2D
 
@@ -17,7 +18,7 @@ var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMateri
 
 func _ready() -> void:
 	enemies_spawn_timer.wait_time = spawn_cooldown
-	
+	spawn_animation.play("spawn")
 	#if enemy_scene != null:
 		#enemy_spawn_buildup_particles.lifetime = spawn_cooldown
 		#enemy_spawn_buildup_particles.restart()
@@ -33,7 +34,7 @@ func _on_enemies_spawn_timer_timeout() -> void:
 	var enemy_instance = enemy_scenes.pick_random().instantiate()
 	enemies_parent_node.add_child(enemy_instance)
 	EventBus.emit_signal("play_enemy_spawn_sound")
-	
+	spawn_animation.play("spawn")
 	#enemy_spawn_flare_particles.restart()
 	
 	#if not enemies_spawn_timer.is_stopped():
