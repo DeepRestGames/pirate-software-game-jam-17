@@ -97,10 +97,10 @@ height = 152.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1fljk"]
 radius = 1000.0
 
-[node name="EnemySpawnPoint" type="Area2D"]
+[node name="EnemySpawnPoint" type="RigidBody2D"]
 collision_layer = 2
-collision_mask = 16
-monitorable = false
+collision_mask = 0
+gravity_scale = 0.0
 script = ExtResource("1_ber4e")
 enemy_scenes = Array[PackedScene]([ExtResource("2_mqeph"), ExtResource("3_stgb1")])
 
@@ -146,6 +146,15 @@ animation = &"spawn"
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_8q6ur")
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8q6ur")
+
 [node name="AggroArea2D" type="Area2D" parent="."]
 collision_layer = 0
 monitorable = false
@@ -153,7 +162,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea2D"]
 shape = SubResource("CircleShape2D_1fljk")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="EnemiesSpawnTimer" to="." method="_on_enemies_spawn_timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_entered"]
 [connection signal="body_exited" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_exited"]

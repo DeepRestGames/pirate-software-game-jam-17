@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 
 
 @onready var enemies_parent_node = $EnemiesParentNode
@@ -50,13 +50,6 @@ func take_damage(value) -> void:
 		queue_free()
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("PlayerProjectile"):
-		if body.has_method("on_impact"):
-			body.on_impact()
-		take_damage(1)
-
-
 func drop_material() -> void:
 	var dropInstance = fabricatorMaterialScene.instantiate()
 	dropInstance.global_position = global_position
@@ -71,3 +64,10 @@ func _on_aggro_area_2d_body_entered(body: Node2D) -> void:
 func _on_aggro_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		enemies_spawn_timer.stop()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PlayerProjectile"):
+		if body.has_method("on_impact"):
+			body.on_impact()
+		take_damage(1)
