@@ -10,6 +10,7 @@ extends CharacterBody2D
 #@onready var shooting_animation = $PlayerSprite/Weapon/WeaponSprite/ShootingAnimation
 const weapon_x_offset = 15
 const weapon_muzzle_x_offset = 10
+var player_blood_scene = preload("res://Scenes/Player/PlayerBlood.tscn")
 
 # Shooting
 var projectile = preload("res://Scenes/Player/PlayerProjectile.tscn")
@@ -18,8 +19,6 @@ var maxAmmo: int = 10
 var currentAmmo
 var reloadCooldown := 1.5
 var currentReloadCooldown : float
-
-
 
 # HP
 var currentHP: int = 3
@@ -122,6 +121,10 @@ func take_damage(value) -> void:
 	blinking_player_tween.tween_property(player_sprite, "visible", true, .001)
 	
 	EventBus.emit_signal("screen_shake", 20, 10)
+	
+	var player_blood_instance = player_blood_scene.instantiate()
+	player_blood_instance.global_position = position
+	get_tree().root.add_child(player_blood_instance)
 
 
 func shoot() -> void:
@@ -129,7 +132,6 @@ func shoot() -> void:
 	projectile_instance.global_position = muzzle_marker.global_position
 	get_parent().add_child(projectile_instance)
 	muzzle_marker.add_child(shooting_animation.instantiate())
-	
 	
 	currentAmmo -= 1
 	
