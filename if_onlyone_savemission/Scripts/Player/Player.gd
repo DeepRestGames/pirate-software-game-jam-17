@@ -104,6 +104,15 @@ func take_damage(value) -> void:
 	
 	remove_hp(value)
 	currentInvincibilityCooldown = invincibilityCooldown
+	
+	var blinking_player_tween = get_tree().create_tween().set_parallel(false)
+	blinking_player_tween.tween_property(player_sprite, "visible", false, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", true, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", false, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", true, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", false, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", true, .001)
+	
 	EventBus.emit_signal("screen_shake", 20, 10)
 
 
