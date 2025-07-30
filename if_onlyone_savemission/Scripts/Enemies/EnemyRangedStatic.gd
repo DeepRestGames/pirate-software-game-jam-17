@@ -42,8 +42,8 @@ func shoot():
 	get_parent().add_child(projectile_instance)
 
 
-func take_damage() -> void:
-	hp -= 1
+func take_damage(value) -> void:
+	hp -= value
 	if hp <= 0:
 		if randf_range(0, 1) <= drop_rate:
 			drop_material()
@@ -53,7 +53,7 @@ func take_damage() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerProjectile"):
-		take_damage()
+		take_damage(1)
 
 
 func drop_material() -> void:

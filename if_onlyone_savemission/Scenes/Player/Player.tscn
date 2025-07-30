@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://44tdvccu5w1g" path="res://Scripts/Player/Player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://c0hr88pmffrkx" path="res://Assets/Sprites/RoundShadow.png" id="2_t26db"]
+[ext_resource type="Script" uid="uid://ba5scic023y72" path="res://Scripts/Player/PlayerPowerups.gd" id="2_t26db"]
 [ext_resource type="Texture2D" uid="uid://yt8jiybethpy" path="res://Assets/Sprites/Player.png" id="2_ude3g"]
 [ext_resource type="Script" uid="uid://gmoeknbubjgr" path="res://Scripts/Player/WeaponRotation.gd" id="3_h54ih"]
 [ext_resource type="Texture2D" uid="uid://cqqgt05fxr4ws" path="res://Assets/Sprites/Weapon.png" id="4_ude3g"]
@@ -165,6 +166,8 @@ modulate = Color(0, 0, 0, 0.247059)
 position = Vector2(0, 35)
 scale = Vector2(0.55, 0.15)
 texture = ExtResource("2_t26db")
+[node name="Powerups" type="Node2D" parent="."]
+script = ExtResource("2_t26db")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qbkls")

@@ -36,7 +36,8 @@ const ROTATION_SPEED: float = 2
 var fabricator_material_quantity: int = 0
 var powerup_chips_quantity: int = 0
 var potions_quantity: int = 0
-var bombs_quantity: int = 0
+var bombs_quantity: int = 10
+var bomb_scene = preload("res://Scenes/Consumables/Bomb.tscn")
 
 
 func _ready() -> void:
@@ -66,6 +67,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("drink_potion"):
 		heal_hp()
+	
+	if event.is_action_pressed("place_bomb"):
+		place_bomb()
 
 
 func get_movement_input() -> void:
@@ -102,12 +106,21 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func take_damage() -> void:
+func take_damage(value) -> void:
 	if currentInvincibilityCooldown > 0:
 		return
 	
-	remove_hp(1)
+	remove_hp(value)
 	currentInvincibilityCooldown = invincibilityCooldown
+	
+	var blinking_player_tween = get_tree().create_tween().set_parallel(false)
+	blinking_player_tween.tween_property(player_sprite, "visible", false, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", true, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", false, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", true, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", false, invincibilityCooldown / 5)
+	blinking_player_tween.tween_property(player_sprite, "visible", true, .001)
+	
 	EventBus.emit_signal("screen_shake", 20, 10)
 
 
@@ -151,13 +164,14 @@ func add_powerup_chip(value) -> void:
 	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
 
 
-func remove_powerup_chip(value) -> void:
+func remove_powerup_chip(value) -> bool:
 	if value > powerup_chips_quantity:
 		printerr("Not enough powerup chips!")
-		return
+		return false
 	
 	powerup_chips_quantity -= value
 	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
+	return true
 
 
 func add_potion(value) -> void:
@@ -213,9 +227,15 @@ func heal_hp() -> void:
 	EventBus.emit_signal("update_current_potions_count", potions_quantity)
 
 
+func place_bomb() -> void:
+	var bomb_instance = bomb_scene.instantiate()
+	bomb_instance.global_position = position
+	get_tree().root.add_child(bomb_instance)
+
+
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemies"):
-		take_damage()
+		take_damage(1)
 	elif body.is_in_group("EnemyProjectiles"):
 		body.queue_free()
-		take_damage()
+		take_damage(1)

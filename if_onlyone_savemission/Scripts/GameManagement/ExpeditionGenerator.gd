@@ -23,6 +23,10 @@ var ground_tiles_texture = preload("res://Assets/Sprites/GroundTexture.png")
 const min_number_ground_tiles = 500
 const max_number_ground_tiles = 1000
 
+var bomb_tutorial_scene = preload("res://Scenes/UI/BombTutorial.tscn")
+var potion_tutorial_scene = preload("res://Scenes/UI/PotionTutorial.tscn")
+
+
 # Spare consumables
 @onready var spare_consumables_parent = $"../SpareConsumables"
 var fabricator_material_scene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
@@ -41,6 +45,8 @@ func _ready() -> void:
 	map_size = Vector2(map_size_x, map_size_y)
 	
 	generate_new_expedition()
+	
+	EventBus.connect("move_ship", move_ship)
 
 
 func generate_new_expedition() -> void:
@@ -92,9 +98,16 @@ func calculate_enemy_spawner_position() -> Vector2:
 
 func position_ground_tiles() -> void:
 	var ground_tiles_number = randi_range(min_number_ground_tiles, max_number_ground_tiles)
-	
+
 	for i in ground_tiles_number:
 		generate_ground_tile()
+
+	var bomb_tutorial_instance = bomb_tutorial_scene.instantiate()
+	bomb_tutorial_instance.global_position = Vector2(250, 0)
+	ground_features_parent.add_child(bomb_tutorial_instance)
+	var potion_tutorial_instance = potion_tutorial_scene.instantiate()
+	potion_tutorial_instance.global_position = Vector2(-250, 0)
+	ground_features_parent.add_child(potion_tutorial_instance)
 
 
 func generate_ground_tile() -> void:
@@ -143,3 +156,23 @@ func position_powerup_chip() -> void:
 		spare_consumables_parent.add_child(powerup_chip_instance)
 		
 		EventBus.emit_signal("send_powerup_global_position", powerup_chip_instance.global_position)
+
+
+func clear_procedural_generated_entities() -> void:
+	for i in navigation_region.get_children():
+		i.queue_free()
+	
+	for i in enemies_parent.get_children():
+		i.queue_free()
+	
+	for i in ground_features_parent.get_children():
+		i.queue_free()
+	
+	for i in spare_consumables_parent.get_children():
+		i.queue_free()
+	EventBus.emit_signal("clear_powerup_positions")
+
+
+func move_ship() -> void:
+	clear_procedural_generated_entities()
+	generate_new_expedition()
