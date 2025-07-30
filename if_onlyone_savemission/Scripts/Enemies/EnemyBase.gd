@@ -21,14 +21,14 @@ func stop_chasing_player():
 	pass
 
 
-func take_damage():
+func take_damage(value):
 	#EventBus.emit_signal("spawn_blood_particles", global_position)
 	#EventBus.emit_signal("spawn_spark_particles", global_position)
 	#EventBus.emit_signal("play_thunder_sfx")
 	#EventBus.emit_signal("play_lightning_sfx", -5)
 	#EventBus.emit_signal("screen_shake")
 	
-	hp -= 1
+	hp -= value
 	if hp <= 0:
 		if randf_range(0, 1) <= drop_rate:
 			drop_material()
