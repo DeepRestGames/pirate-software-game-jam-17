@@ -23,6 +23,10 @@ var ground_tiles_texture = preload("res://Assets/Sprites/GroundTexture.png")
 const min_number_ground_tiles = 500
 const max_number_ground_tiles = 1000
 
+var bomb_tutorial_scene = preload("res://Scenes/UI/BombTutorial.tscn")
+var potion_tutorial_scene = preload("res://Scenes/UI/PotionTutorial.tscn")
+
+
 # Spare consumables
 @onready var spare_consumables_parent = $"../SpareConsumables"
 var fabricator_material_scene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
@@ -94,9 +98,16 @@ func calculate_enemy_spawner_position() -> Vector2:
 
 func position_ground_tiles() -> void:
 	var ground_tiles_number = randi_range(min_number_ground_tiles, max_number_ground_tiles)
-	
+
 	for i in ground_tiles_number:
 		generate_ground_tile()
+
+	var bomb_tutorial_instance = bomb_tutorial_scene.instantiate()
+	bomb_tutorial_instance.global_position = Vector2(250, 0)
+	ground_features_parent.add_child(bomb_tutorial_instance)
+	var potion_tutorial_instance = potion_tutorial_scene.instantiate()
+	potion_tutorial_instance.global_position = Vector2(-250, 0)
+	ground_features_parent.add_child(potion_tutorial_instance)
 
 
 func generate_ground_tile() -> void:
