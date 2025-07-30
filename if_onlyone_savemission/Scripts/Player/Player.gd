@@ -141,13 +141,14 @@ func add_powerup_chip(value) -> void:
 	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
 
 
-func remove_powerup_chip(value) -> void:
+func remove_powerup_chip(value) -> bool:
 	if value > powerup_chips_quantity:
 		printerr("Not enough powerup chips!")
-		return
+		return false
 	
 	powerup_chips_quantity -= value
 	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
+	return true
 
 
 func add_potion(value) -> void:

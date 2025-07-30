@@ -84,6 +84,12 @@ signal add_powerup_chip(value)
 signal remove_powerup_chip(value)
 
 @warning_ignore("unused_signal")
+signal level_up_powerup(powerup_ID)
+
+@warning_ignore("unused_signal")
+signal level_up_powerup_completed(powerup_ID, powerup_level)
+
+@warning_ignore("unused_signal")
 signal add_potion(value)
 
 @warning_ignore("unused_signal")

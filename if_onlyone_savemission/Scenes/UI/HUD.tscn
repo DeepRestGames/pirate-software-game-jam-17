@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=20 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
+[ext_resource type="FontFile" uid="uid://078w1ofr2xjx" path="res://Assets/Fonts/Micro5-Regular.ttf" id="2_gmqj4"]
 [ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_qc5w2"]
 [ext_resource type="Script" uid="uid://bore17jo71by6" path="res://Scripts/UI/FabricatorMaterialCounter.gd" id="2_xaom8"]
 [ext_resource type="Script" uid="uid://ykgqogdlqidp" path="res://Scripts/UI/HPCounter.gd" id="4_4bm6u"]
@@ -10,10 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://diyaie56mgt0a" path="res://Assets/UITextures/ArrowC.png" id="5_ykvyr"]
 [ext_resource type="Script" uid="uid://dac0rqgt8qakd" path="res://Scripts/UI/PotionsCounter.gd" id="9_i4i0y"]
 [ext_resource type="Script" uid="uid://dkten4p1hdo57" path="res://Scripts/UI/BombsCounter.gd" id="10_yenib"]
-[ext_resource type="Script" uid="uid://dvxby01eopx46" path="res://Scripts/UI/InteractionPrompt.gd" id="11_pydgx"]
+[ext_resource type="Script" path="res://Scripts/UI/InteractionPrompt.gd" id="11_pydgx"]
 [ext_resource type="Texture2D" uid="uid://c57y1q7g0c0b0" path="res://Assets/UITextures/E_Button.png" id="12_eebq5"]
 [ext_resource type="Script" uid="uid://6q37llehwjjk" path="res://Scripts/Ship/ShipMenu.gd" id="13_18ujm"]
 [ext_resource type="Script" uid="uid://qccpvk1auj7o" path="res://Scripts/Ship/FabricatorPanel.gd" id="14_jt2rc"]
+[ext_resource type="Script" uid="uid://7ps6v0je1128" path="res://Scripts/Ship/PowerupsPanel.gd" id="15_jbjhr"]
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eebq5"]
@@ -63,16 +65,19 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CurrentAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "5"
 
 [node name="Separator" type="Label" parent="AmmoCounter/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "/"
 
 [node name="MaxAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "10"
 
@@ -101,6 +106,7 @@ expand_mode = 2
 [node name="CurrentAmount" type="Label" parent="FabricatorMaterialCounter/HBoxContainer"]
 layout_direction = 3
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
@@ -134,6 +140,7 @@ expand_mode = 2
 [node name="CurrentAmount" type="Label" parent="PowerupChipsCounter/HBoxContainer"]
 layout_direction = 3
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
@@ -161,6 +168,7 @@ expand_mode = 2
 [node name="CurrentAmount" type="Label" parent="HPCounter/HBoxContainer"]
 layout_direction = 3
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "0"
 
@@ -204,6 +212,7 @@ layout_mode = 0
 offset_top = 40.0
 offset_right = 40.0
 offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("2_gmqj4")
 text = "10m"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -240,6 +249,7 @@ expand_mode = 2
 [node name="CurrentAmount" type="Label" parent="PotionsCounter/HBoxContainer"]
 layout_direction = 3
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
@@ -271,6 +281,7 @@ expand_mode = 2
 [node name="CurrentAmount" type="Label" parent="BombsCounter/HBoxContainer"]
 layout_direction = 3
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
@@ -306,6 +317,7 @@ expand_mode = 5
 
 [node name="Label" type="Label" parent="InteractionPrompt/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 20
 text = "INTERACT"
 horizontal_alignment = 1
@@ -348,7 +360,203 @@ anchor_right = 0.475
 anchor_bottom = 0.95
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+script = ExtResource("15_jbjhr")
 metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel"]
+custom_minimum_size = Vector2(220, 410)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.06
+anchor_top = 0.0444444
+anchor_right = 0.94
+anchor_bottom = 0.955556
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+text = "POWERUPS"
+horizontal_alignment = 1
+
+[node name="HP" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
+layout_mode = 2
+text = "HP"
+horizontal_alignment = 1
+
+[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="HPLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+layout_mode = 2
+text = "+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 3
+
+[node name="HPCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="Speed" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
+layout_mode = 2
+text = "SPEED"
+horizontal_alignment = 1
+
+[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="SpeedLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+layout_mode = 2
+text = "+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 3
+
+[node name="SpeedCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="Ammo" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="AmmoLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
+layout_mode = 2
+text = "AMMO CAPACITY"
+horizontal_alignment = 1
+
+[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="AmmoLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+layout_mode = 2
+text = "+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_qc5w2")
+expand_mode = 3
+
+[node name="AmmoCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/HBoxContainer"]
+layout_mode = 2
+text = "10"
 
 [node name="FabricatorPanel" type="Panel" parent="ShipMenu/Background"]
 custom_minimum_size = Vector2(250, 200)
@@ -521,6 +729,9 @@ grow_vertical = 2
 text = "EXIT SHIP"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots/HPLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_hp_level_up_button_pressed"]
+[connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots/SpeedLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_speed_level_up_button_pressed"]
+[connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots/AmmoLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_ammo_level_up_button_pressed"]
 [connection signal="visibility_changed" from="ShipMenu/Background/FabricatorPanel" to="ShipMenu/Background/FabricatorPanel" method="_on_visibility_changed"]
 [connection signal="pressed" from="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/CraftPotionButton" to="ShipMenu/Background/FabricatorPanel" method="_on_craft_potion_button_pressed"]
 [connection signal="pressed" from="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/CraftBombButton" to="ShipMenu/Background/FabricatorPanel" method="_on_craft_bomb_button_pressed"]
