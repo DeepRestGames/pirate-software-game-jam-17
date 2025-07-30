@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc8x5rtjnlaa3"]
+[gd_scene load_steps=5 format=3 uid="uid://dc8x5rtjnlaa3"]
 
 [ext_resource type="Script" uid="uid://fhed5byxt7jr" path="res://Scripts/Environment/ObstacleWithDrop.gd" id="1_3fsno"]
-[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_it2pl"]
+[ext_resource type="Texture2D" uid="uid://c0hr88pmffrkx" path="res://Assets/Sprites/RoundShadow.png" id="2_it2pl"]
+[ext_resource type="Texture2D" uid="uid://cawrumydjorux" path="res://Assets/Sprites/WreckedShuttle.png" id="3_3c7mv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uogot"]
 radius = 70.0
@@ -11,9 +12,17 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_3fsno")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0.364645, 0.365411, 1)
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.247059)
+position = Vector2(-1, 65)
+scale = Vector2(1.31641, 0.358848)
 texture = ExtResource("2_it2pl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -6)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_3c7mv")
+hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_uogot")

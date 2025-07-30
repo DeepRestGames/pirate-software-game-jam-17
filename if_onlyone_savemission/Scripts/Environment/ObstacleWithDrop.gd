@@ -1,11 +1,15 @@
 extends StaticBody2D
 
+@onready var sprite = $Sprite2D
 
 @export var hp = 10
 @export var drop_rate := .8
 var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
 
 
+func _ready() -> void:
+	sprite.frame = randi() % sprite.hframes
+	
 func take_damage() -> void:
 	hp -= 1
 

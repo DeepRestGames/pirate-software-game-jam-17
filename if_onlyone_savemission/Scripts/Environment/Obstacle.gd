@@ -1,9 +1,13 @@
 extends StaticBody2D
 
+@onready var sprite = $Sprite2D
 
 @export var hp = 10
 
-
+func _ready() -> void:
+	sprite.frame = randi() % sprite.hframes
+	
+	
 func take_damage() -> void:
 	hp -= 1
 
