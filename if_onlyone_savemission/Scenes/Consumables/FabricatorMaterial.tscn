@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://k5air2e7arh4"]
+[gd_scene load_steps=9 format=3 uid="uid://k5air2e7arh4"]
 
 [ext_resource type="Script" uid="uid://c2ne1ciiiklfr" path="res://Scripts/Consumables/FabricatorMaterial.gd" id="1_56pls"]
 [ext_resource type="Texture2D" uid="uid://e0nxhcl6hn3s" path="res://Assets/Sprites/Scrap.png" id="2_56pls"]
 [ext_resource type="Texture2D" uid="uid://byd1xs6oeu17r" path="res://Assets/Sprites/PlayerProjectileGlow.png" id="2_i01tv"]
+[ext_resource type="Texture2D" uid="uid://c0hr88pmffrkx" path="res://Assets/Sprites/RoundShadow.png" id="4_gmi6t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_56pls"]
 radius = 25.0
@@ -73,6 +74,12 @@ _data = {
 collision_layer = 0
 monitorable = false
 script = ExtResource("1_56pls")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.247059)
+position = Vector2(0, 22)
+scale = Vector2(0.269531, 0.0734734)
+texture = ExtResource("4_gmi6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_56pls")
