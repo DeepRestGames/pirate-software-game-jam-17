@@ -9,6 +9,7 @@ var direction: Vector2
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	direction = to_local(player.global_position).normalized()
+	rotation = direction.angle()
 
 
 func _physics_process(delta: float) -> void:

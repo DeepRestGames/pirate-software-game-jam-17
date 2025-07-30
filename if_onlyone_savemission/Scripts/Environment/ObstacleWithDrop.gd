@@ -1,10 +1,15 @@
 extends RigidBody2D
 
+@onready var sprite = $Sprite2D
 
 @export var hp = 10
 @export var drop_rate := .8
 var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
 
+
+func _ready() -> void:
+	sprite.frame = randi() % sprite.hframes
+	
 
 func take_damage(value) -> void:
 	hp -= value
@@ -24,5 +29,6 @@ func drop_material() -> void:
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("PlayerProjectile"):
-		body.queue_free()
+		if body.has_method("on_impact"):
+			body.on_impact()
 		take_damage(1)

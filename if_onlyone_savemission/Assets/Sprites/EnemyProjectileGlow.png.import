@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk02nmwyicwms"
-path="res://.godot/imported/heart.png-b59f7aa733b0ae6198088fb701d44769.ctex"
+uid="uid://cds70ojuadmoo"
+path="res://.godot/imported/EnemyProjectileGlow.png-66ffcf7bdb6d777b36ada58892138b74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/heart.png"
-dest_files=["res://.godot/imported/heart.png-b59f7aa733b0ae6198088fb701d44769.ctex"]
+source_file="res://Assets/Sprites/EnemyProjectileGlow.png"
+dest_files=["res://.godot/imported/EnemyProjectileGlow.png-66ffcf7bdb6d777b36ada58892138b74.ctex"]
 
 [params]
 

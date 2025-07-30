@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk02nmwyicwms"
-path="res://.godot/imported/heart.png-b59f7aa733b0ae6198088fb701d44769.ctex"
+uid="uid://cawrumydjorux"
+path="res://.godot/imported/WreckedShuttle.png-c8de1b103a8350a05b80db41521b9820.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/heart.png"
-dest_files=["res://.godot/imported/heart.png-b59f7aa733b0ae6198088fb701d44769.ctex"]
+source_file="res://Assets/Sprites/WreckedShuttle.png"
+dest_files=["res://.godot/imported/WreckedShuttle.png-c8de1b103a8350a05b80db41521b9820.ctex"]
 
 [params]
 
