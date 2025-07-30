@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bgw3vnrt1kuhu"]
 
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="1_aisys"]
-[ext_resource type="Texture2D" uid="uid://c24541cla84fj" path="res://Assets/Sprites/Ship.png" id="2_ptqah"]
+[ext_resource type="PackedScene" uid="uid://dyhaxeflnkmln" path="res://Scenes/Ship/Ship.tscn" id="2_aisys"]
 [ext_resource type="PackedScene" uid="uid://b3nrx4ogcfxml" path="res://Scenes/Player/Player.tscn" id="3_t5ngo"]
 [ext_resource type="Script" uid="uid://c8p7jaqynocev" path="res://Scripts/GameManagement/DifficultyManager.gd" id="4_hjrmh"]
 [ext_resource type="PackedScene" uid="uid://c4xmmv3ww4l3p" path="res://Scenes/Enemies/EnemyRanged.tscn" id="5_kcb6y"]
@@ -35,14 +35,9 @@ navigation_polygon = SubResource("NavigationPolygon_cp132")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Ship" type="Sprite2D" parent="."]
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("2_ptqah")
-hframes = 13
-vframes = 2
-frame = 13
-
 [node name="SpareConsumables" type="Node2D" parent="."]
+
+[node name="Ship" parent="." instance=ExtResource("2_aisys")]
 
 [node name="Player" parent="." instance=ExtResource("3_t5ngo")]
 position = Vector2(-166, 89)
