@@ -3,12 +3,16 @@ extends RigidBody2D
 @onready var sprite = $Sprite2D
 
 @export var hp = 10
-@export var drop_rate := .8
+@export var drop_rate := 1
+const min_material_drop_quantity = 3
+const max_material_drop_quantity = 6
+var drop_quantity
 var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
 
 
 func _ready() -> void:
 	sprite.frame = randi() % sprite.hframes
+	drop_quantity = randi_range(min_material_drop_quantity, max_material_drop_quantity)
 	
 
 func take_damage(value) -> void:
@@ -29,9 +33,10 @@ func take_damage(value) -> void:
 
 
 func drop_material() -> void:
-	var dropInstance = fabricatorMaterialScene.instantiate()
-	dropInstance.global_position = global_position
-	get_tree().current_scene.call_deferred("add_child", dropInstance)
+	for i in drop_quantity:
+		var dropInstance = fabricatorMaterialScene.instantiate()
+		dropInstance.global_position = global_position + Vector2(randf_range(-40, 40), randf_range(-40, 40))
+		get_tree().current_scene.call_deferred("add_child", dropInstance)
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
