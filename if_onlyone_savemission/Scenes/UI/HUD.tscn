@@ -27,6 +27,26 @@
 atlas = ExtResource("11_cn5rm")
 region = Rect2(0, 0, 17, 17)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ako3u"]
+atlas = ExtResource("4_dds1n")
+region = Rect2(72, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khvou"]
+atlas = ExtResource("6_cn5rm")
+region = Rect2(11, 13, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55bpt"]
+atlas = ExtResource("8_cn5rm")
+region = Rect2(3, 4, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n5r3"]
+atlas = ExtResource("13_ako3u")
+region = Rect2(2.5, 2, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h4o4"]
+atlas = ExtResource("13_ako3u")
+region = Rect2(18.5, 18.5, 11, 11)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eebq5"]
 bg_color = Color(1, 1, 1, 0.133333)
 border_width_left = 2
@@ -51,28 +71,8 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_khvou"]
-atlas = ExtResource("6_cn5rm")
-region = Rect2(11, 13, 40, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0n5r3"]
-atlas = ExtResource("13_ako3u")
-region = Rect2(2.5, 2, 11, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ako3u"]
-atlas = ExtResource("4_dds1n")
-region = Rect2(72, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5h4o4"]
-atlas = ExtResource("13_ako3u")
-region = Rect2(18.5, 18.5, 11, 11)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_55bpt"]
-atlas = ExtResource("8_cn5rm")
-region = Rect2(3, 4, 9, 9)
-
 [node name="HUD" type="Control"]
-z_index = 1
+z_index = 100
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 15
@@ -135,11 +135,209 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
+[node name="AmmoCounter" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.980903
+anchor_top = 0.976852
+anchor_right = 0.980903
+anchor_bottom = 0.976852
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_omqfp")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AmmoCounter"]
+layout_mode = 1
+offset_left = -44.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrentAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "5"
+
+[node name="Separator" type="Label" parent="AmmoCounter/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "/"
+
+[node name="MaxAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "10"
+
+[node name="FabricatorMaterialCounter" type="Control" parent="."]
+process_mode = 3
+layout_mode = 1
+anchor_left = 0.980903
+anchor_top = 0.0231481
+anchor_right = 0.980903
+anchor_bottom = 0.0231481
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("2_xaom8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FabricatorMaterialCounter"]
+layout_direction = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="FabricatorMaterialIcon" type="TextureRect" parent="FabricatorMaterialCounter/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ako3u")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="CurrentAmount" type="Label" parent="FabricatorMaterialCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="PowerupChipsCounter" type="Control" parent="."]
+process_mode = 3
+layout_mode = 1
+anchor_left = 0.980903
+anchor_top = 0.0231481
+anchor_right = 0.980903
+anchor_bottom = 0.0231481
+offset_left = -0.000244141
+offset_top = 55.0
+offset_right = -0.000244141
+offset_bottom = 55.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("4_d2sja")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PowerupChipsCounter"]
+layout_direction = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="PowerupChipIcon" type="TextureRect" parent="PowerupChipsCounter/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_khvou")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="PowerupChipsCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="HPCounter" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.0190972
+anchor_top = 0.0231481
+anchor_right = 0.0190972
+anchor_bottom = 0.0231481
+mouse_filter = 2
+script = ExtResource("4_4bm6u")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HPCounter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="HPIcon" type="TextureRect" parent="HPCounter/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_55bpt")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="HPCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="PotionsCounter" type="Control" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -128.0
+offset_right = 22.0
+offset_bottom = -128.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("9_i4i0y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PotionsCounter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="PotionlIcon" type="TextureRect" parent="PotionsCounter/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_0n5r3")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="PotionsCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="BombsCounter" type="Control" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -68.0
+offset_right = 60.0
+offset_bottom = -68.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("10_yenib")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BombsCounter"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+
+[node name="BomblIcon" type="TextureRect" parent="BombsCounter/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5h4o4")
+expand_mode = 2
+
+[node name="CurrentAmount" type="Label" parent="BombsCounter/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
 [node name="ShipMenu" type="Control" parent="."]
 process_mode = 3
 visible = false
-z_index = 100
-z_as_relative = false
+z_index = 150
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -420,21 +618,13 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_0n5r3")
 expand_mode = 2
 
-[node name="CurrentPotionsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
-layout_mode = 2
-text = "x0"
-vertical_alignment = 1
-
 [node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
 layout_mode = 2
 alignment = 1
 
 [node name="CraftPotionButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer"]
-modulate = Color(0, 0.65441, 5.77569e-07, 1)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "+"
-icon = ExtResource("15_pd044")
 icon_alignment = 1
 expand_icon = true
 
@@ -461,21 +651,13 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_5h4o4")
 expand_mode = 2
 
-[node name="CurrentBombsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
-layout_mode = 2
-text = "x0"
-vertical_alignment = 1
-
 [node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
 layout_mode = 2
 alignment = 1
 
 [node name="CraftBombButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer"]
-modulate = Color(0, 0.65441, 5.77569e-07, 1)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "+"
-icon = ExtResource("15_pd044")
 icon_alignment = 1
 expand_icon = true
 
@@ -551,205 +733,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "EXIT SHIP"
 metadata/_edit_use_anchors_ = true
-
-[node name="AmmoCounter" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.980903
-anchor_top = 0.976852
-anchor_right = 0.980903
-anchor_bottom = 0.976852
-grow_horizontal = 0
-grow_vertical = 0
-mouse_filter = 2
-script = ExtResource("1_omqfp")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="AmmoCounter"]
-layout_mode = 1
-offset_left = -44.0
-offset_top = -23.0
-grow_horizontal = 0
-grow_vertical = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="CurrentAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "5"
-
-[node name="Separator" type="Label" parent="AmmoCounter/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "/"
-
-[node name="MaxAmmo" type="Label" parent="AmmoCounter/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "10"
-
-[node name="FabricatorMaterialCounter" type="Control" parent="."]
-process_mode = 3
-layout_mode = 1
-anchor_left = 0.980903
-anchor_top = 0.0231481
-anchor_right = 0.980903
-anchor_bottom = 0.0231481
-grow_horizontal = 0
-mouse_filter = 2
-script = ExtResource("2_xaom8")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="FabricatorMaterialCounter"]
-layout_direction = 3
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 10
-
-[node name="FabricatorMaterialIcon" type="TextureRect" parent="FabricatorMaterialCounter/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_ako3u")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="CurrentAmount" type="Label" parent="FabricatorMaterialCounter/HBoxContainer"]
-layout_direction = 3
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-
-[node name="PowerupChipsCounter" type="Control" parent="."]
-process_mode = 3
-layout_mode = 1
-anchor_left = 0.980903
-anchor_top = 0.0231481
-anchor_right = 0.980903
-anchor_bottom = 0.0231481
-offset_left = -0.000244141
-offset_top = 55.0
-offset_right = -0.000244141
-offset_bottom = 55.0
-grow_horizontal = 0
-mouse_filter = 2
-script = ExtResource("4_d2sja")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PowerupChipsCounter"]
-layout_direction = 3
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 10
-
-[node name="PowerupChipIcon" type="TextureRect" parent="PowerupChipsCounter/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_khvou")
-expand_mode = 2
-
-[node name="CurrentAmount" type="Label" parent="PowerupChipsCounter/HBoxContainer"]
-layout_direction = 3
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-
-[node name="HPCounter" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.0190972
-anchor_top = 0.0231481
-anchor_right = 0.0190972
-anchor_bottom = 0.0231481
-mouse_filter = 2
-script = ExtResource("4_4bm6u")
-metadata/_edit_use_anchors_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HPCounter"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 10
-
-[node name="HPIcon" type="TextureRect" parent="HPCounter/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_55bpt")
-expand_mode = 2
-
-[node name="CurrentAmount" type="Label" parent="HPCounter/HBoxContainer"]
-layout_direction = 3
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "0"
-
-[node name="PotionsCounter" type="Control" parent="."]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 22.0
-offset_top = -128.0
-offset_right = 22.0
-offset_bottom = -128.0
-grow_vertical = 0
-mouse_filter = 2
-script = ExtResource("9_i4i0y")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PotionsCounter"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 10
-
-[node name="PotionlIcon" type="TextureRect" parent="PotionsCounter/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_0n5r3")
-expand_mode = 2
-
-[node name="CurrentAmount" type="Label" parent="PotionsCounter/HBoxContainer"]
-layout_direction = 3
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
-
-[node name="BombsCounter" type="Control" parent="."]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 60.0
-offset_top = -68.0
-offset_right = 60.0
-offset_bottom = -68.0
-grow_vertical = 0
-mouse_filter = 2
-script = ExtResource("10_yenib")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BombsCounter"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/separation = 10
-
-[node name="BomblIcon" type="TextureRect" parent="BombsCounter/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_5h4o4")
-expand_mode = 2
-
-[node name="CurrentAmount" type="Label" parent="BombsCounter/HBoxContainer"]
-layout_direction = 3
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
 
 [node name="InteractionPrompt" type="Control" parent="."]
 visible = false

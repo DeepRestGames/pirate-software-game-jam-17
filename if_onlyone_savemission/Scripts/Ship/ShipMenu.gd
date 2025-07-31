@@ -1,6 +1,9 @@
 extends Control
 
 
+@onready var arrow_hints = $"../ArrowHints"
+
+
 func _ready() -> void:
 	EventBus.connect("show_ship_menu", show_ship_menu)
 
@@ -14,10 +17,12 @@ func show_ship_menu(value) -> void:
 	if value:
 		EventBus.emit_signal("show_ship_interaction_prompt", false)
 		show()
+		arrow_hints.hide()
 		Engine.time_scale = 0
 	else:
 		EventBus.emit_signal("show_ship_interaction_prompt", true)
 		hide()
+		arrow_hints.show()
 		Engine.time_scale = 1
 
 
