@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgw3vnrt1kuhu"]
+[gd_scene load_steps=13 format=3 uid="uid://bgw3vnrt1kuhu"]
 
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="1_aisys"]
 [ext_resource type="PackedScene" uid="uid://dyhaxeflnkmln" path="res://Scenes/Ship/Ship.tscn" id="2_aisys"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://d1h5f5634ob5s" path="res://Scripts/GameManagement/ExpeditionGenerator.gd" id="7_nlbeb"]
 [ext_resource type="PackedScene" uid="uid://dyhrl75vxkhcv" path="res://Scenes/Environment/Obstacle.tscn" id="8_vyipi"]
 [ext_resource type="PackedScene" uid="uid://dc8x5rtjnlaa3" path="res://Scenes/Environment/ObstacleWithDrop.tscn" id="9_vx5l4"]
+[ext_resource type="AudioStream" uid="uid://bbbns6gl8amd5" path="res://Assets/Audio/Music/GameplayMusicDanger.wav" id="10_ptqah"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cp132"]
 vertices = PackedVector2Array(20054, -19893, 20011, 19865, -19999, 19867, -20054, -19942)
@@ -57,3 +58,8 @@ position = Vector2(-800, -500)
 process_mode = 3
 script = ExtResource("7_nlbeb")
 environmental_obstacles = Array[PackedScene]([ExtResource("8_vyipi"), ExtResource("9_vx5l4")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ptqah")
+volume_db = -10.0
+autoplay = true
