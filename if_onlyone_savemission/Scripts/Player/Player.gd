@@ -34,8 +34,8 @@ const ROTATION_SPEED: float = 2
 # Consumables
 var fabricator_material_quantity: int = 0
 var powerup_chips_quantity: int = 0
-var potions_quantity: int = 0
-var bombs_quantity: int = 10
+var potions_quantity: int = 1
+var bombs_quantity: int = 1
 var bomb_scene = preload("res://Scenes/Consumables/Bomb.tscn")
 
 
