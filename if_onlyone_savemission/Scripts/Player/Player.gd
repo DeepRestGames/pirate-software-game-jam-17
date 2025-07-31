@@ -56,7 +56,7 @@ func _ready() -> void:
 	EventBus.connect("add_bomb", add_bomb)
 	EventBus.connect("remove_bomb", remove_bomb)
 	
-	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+	send_HUD_update_data()
 	
 	EventBus.connect("player_respawned", on_player_respawned)
 	EventBus.connect("show_ship_menu", on_player_returned_to_ship)
@@ -272,6 +272,12 @@ func heal_hp() -> void:
 
 
 func place_bomb() -> void:
+	if bombs_quantity == 0:
+		return
+	
+	bombs_quantity -= 1
+	send_HUD_update_data()
+	
 	var bomb_instance = bomb_scene.instantiate()
 	bomb_instance.global_position = position
 	get_tree().root.add_child(bomb_instance)
