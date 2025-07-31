@@ -33,8 +33,8 @@ var fabricator_material_scene = preload("res://Scenes/Consumables/FabricatorMate
 const min_number_fabricator_material = 50
 const max_number_fabricator_material = 200
 var powerup_chip_scene = preload("res://Scenes/Consumables/PowerupChip.tscn")
-const min_number_powerup_chips = 5
-const max_number_powerup_chips = 10
+const min_number_powerup_chips = 2
+const max_number_powerup_chips = 5
 
 
 func _ready() -> void:
@@ -160,6 +160,8 @@ func position_powerup_chip() -> void:
 
 
 func clear_procedural_generated_entities() -> void:
+	EventBus.emit_signal("clear_powerup_positions")
+	
 	for i in navigation_region.get_children():
 		i.queue_free()
 	
@@ -173,7 +175,6 @@ func clear_procedural_generated_entities() -> void:
 	
 	for i in spare_consumables_parent.get_children():
 		i.queue_free()
-	EventBus.emit_signal("clear_powerup_positions")
 
 
 func move_ship() -> void:

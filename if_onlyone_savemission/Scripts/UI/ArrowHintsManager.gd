@@ -37,5 +37,6 @@ func on_powerup_picked_up(node_name) -> void:
 
 
 func clear_powerup_positions() -> void:
-	for i in arrow_hint_powerups_parent.get_children():
-		i.queue_free()
+	for arrow_hint_element in arrow_hints_list:
+		arrow_hint_element.arrow_hint_instance.queue_free()
+		arrow_hints_list.erase(arrow_hint_element)
