@@ -25,7 +25,7 @@ const max_number_ground_tiles = 1000
 
 var bomb_tutorial_scene = preload("res://Scenes/UI/BombTutorial.tscn")
 var potion_tutorial_scene = preload("res://Scenes/UI/PotionTutorial.tscn")
-
+var reload_tutorial_scene = preload("res://Scenes/UI/ReloadTutorial.tscn")
 
 # Spare consumables
 @onready var spare_consumables_parent = $"../SpareConsumables"
@@ -109,6 +109,9 @@ func position_ground_tiles() -> void:
 	var potion_tutorial_instance = potion_tutorial_scene.instantiate()
 	potion_tutorial_instance.global_position = Vector2(-250, 0)
 	ground_features_parent.add_child(potion_tutorial_instance)
+	var reload_tutorial_instance = reload_tutorial_scene.instantiate()
+	reload_tutorial_instance.global_position = Vector2(0, 200)
+	ground_features_parent.add_child(reload_tutorial_instance)
 
 
 func generate_ground_tile() -> void:

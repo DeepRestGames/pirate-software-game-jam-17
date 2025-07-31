@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://coi5pld6pj46m"]
+[gd_scene load_steps=3 format=3 uid="uid://coi5pld6pj46m"]
 
 [ext_resource type="Texture2D" uid="uid://dxccj87uh7nck" path="res://Assets/UITextures/Q_Button.png" id="1_fbpy5"]
+[ext_resource type="FontFile" uid="uid://078w1ofr2xjx" path="res://Assets/Fonts/Micro5-Regular.ttf" id="2_vqexj"]
 
 [node name="PotionTutorial" type="Sprite2D"]
 modulate = Color(1, 1, 1, 0.588235)
@@ -16,7 +17,8 @@ offset_top = 4.0
 offset_right = 43.0
 offset_bottom = 27.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("2_vqexj")
+theme_override_font_sizes/font_size = 20
 text = "DRINK POTION"
 horizontal_alignment = 1
 vertical_alignment = 1
