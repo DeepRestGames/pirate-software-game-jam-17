@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=30 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
 [ext_resource type="FontFile" uid="uid://078w1ofr2xjx" path="res://Assets/Fonts/Micro5-Regular.ttf" id="2_gmqj4"]
@@ -6,17 +6,45 @@
 [ext_resource type="Script" uid="uid://bore17jo71by6" path="res://Scripts/UI/FabricatorMaterialCounter.gd" id="2_xaom8"]
 [ext_resource type="Script" uid="uid://ykgqogdlqidp" path="res://Scripts/UI/HPCounter.gd" id="4_4bm6u"]
 [ext_resource type="Script" uid="uid://blctfngfvyhaa" path="res://Scripts/UI/PowerupChipsCounter.gd" id="4_d2sja"]
+[ext_resource type="Texture2D" uid="uid://e0nxhcl6hn3s" path="res://Assets/Sprites/Scrap.png" id="4_dds1n"]
 [ext_resource type="Script" uid="uid://dmqrx6bkvm48c" path="res://Scripts/UI/ArrowHintsManager.gd" id="5_d2sja"]
 [ext_resource type="Script" uid="uid://ck6vs1q2qt8yj" path="res://Scripts/UI/ArrowHintShip.gd" id="5_lelo4"]
-[ext_resource type="Texture2D" uid="uid://diyaie56mgt0a" path="res://Assets/UITextures/ArrowC.png" id="5_ykvyr"]
+[ext_resource type="Texture2D" uid="uid://dd4wx1tafwr26" path="res://Assets/Sprites/FloppyDisk.png" id="6_cn5rm"]
+[ext_resource type="Texture2D" uid="uid://becgswybqlulg" path="res://Assets/UI/HeartV2.png" id="8_cn5rm"]
 [ext_resource type="Script" uid="uid://dac0rqgt8qakd" path="res://Scripts/UI/PotionsCounter.gd" id="9_i4i0y"]
 [ext_resource type="Script" uid="uid://dkten4p1hdo57" path="res://Scripts/UI/BombsCounter.gd" id="10_yenib"]
-[ext_resource type="Script" path="res://Scripts/UI/InteractionPrompt.gd" id="11_pydgx"]
+[ext_resource type="Texture2D" uid="uid://brqrjvs14wusx" path="res://Assets/UI/Arrow_V3.png" id="11_cn5rm"]
+[ext_resource type="Script" uid="uid://dvxby01eopx46" path="res://Scripts/UI/InteractionPrompt.gd" id="11_pydgx"]
 [ext_resource type="Texture2D" uid="uid://c57y1q7g0c0b0" path="res://Assets/UITextures/E_Button.png" id="12_eebq5"]
 [ext_resource type="Script" uid="uid://6q37llehwjjk" path="res://Scripts/Ship/ShipMenu.gd" id="13_18ujm"]
+[ext_resource type="Texture2D" uid="uid://depuhtpigf0n1" path="res://Assets/UI/Consumables.png" id="13_ako3u"]
 [ext_resource type="Script" uid="uid://qccpvk1auj7o" path="res://Scripts/Ship/FabricatorPanel.gd" id="14_jt2rc"]
 [ext_resource type="Script" uid="uid://7ps6v0je1128" path="res://Scripts/Ship/PowerupsPanel.gd" id="15_jbjhr"]
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ako3u"]
+atlas = ExtResource("4_dds1n")
+region = Rect2(72, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khvou"]
+atlas = ExtResource("6_cn5rm")
+region = Rect2(11, 13, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55bpt"]
+atlas = ExtResource("8_cn5rm")
+region = Rect2(3, 4, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd1yt"]
+atlas = ExtResource("11_cn5rm")
+region = Rect2(0, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n5r3"]
+atlas = ExtResource("13_ako3u")
+region = Rect2(2.5, 2, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h4o4"]
+atlas = ExtResource("13_ako3u")
+region = Rect2(18.5, 18.5, 11, 11)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eebq5"]
 bg_color = Color(0.122067, 0.122067, 0.122067, 1)
@@ -100,8 +128,9 @@ theme_override_constants/separation = 10
 
 [node name="FabricatorMaterialIcon" type="TextureRect" parent="FabricatorMaterialCounter/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_qc5w2")
+texture = SubResource("AtlasTexture_ako3u")
 expand_mode = 2
+stretch_mode = 4
 
 [node name="CurrentAmount" type="Label" parent="FabricatorMaterialCounter/HBoxContainer"]
 layout_direction = 3
@@ -134,7 +163,7 @@ theme_override_constants/separation = 10
 
 [node name="PowerupChipIcon" type="TextureRect" parent="PowerupChipsCounter/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_qc5w2")
+texture = SubResource("AtlasTexture_khvou")
 expand_mode = 2
 
 [node name="CurrentAmount" type="Label" parent="PowerupChipsCounter/HBoxContainer"]
@@ -162,7 +191,7 @@ theme_override_constants/separation = 10
 
 [node name="HPIcon" type="TextureRect" parent="HPCounter/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_qc5w2")
+texture = SubResource("AtlasTexture_55bpt")
 expand_mode = 2
 
 [node name="CurrentAmount" type="Label" parent="HPCounter/HBoxContainer"]
@@ -198,12 +227,12 @@ grow_vertical = 2
 script = ExtResource("5_lelo4")
 
 [node name="ArrowTexture" type="TextureRect" parent="ArrowHints/ArrowHintShip"]
-modulate = Color(0.756525, 0.756525, 0, 1)
+modulate = Color(0.85, 0.68425, 0.5185, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 pivot_offset = Vector2(20, 20)
-texture = ExtResource("5_ykvyr")
+texture = SubResource("AtlasTexture_yd1yt")
 stretch_mode = 5
 flip_h = true
 
@@ -243,7 +272,7 @@ theme_override_constants/separation = 10
 
 [node name="PotionlIcon" type="TextureRect" parent="PotionsCounter/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_qc5w2")
+texture = SubResource("AtlasTexture_0n5r3")
 expand_mode = 2
 
 [node name="CurrentAmount" type="Label" parent="PotionsCounter/HBoxContainer"]
@@ -275,7 +304,7 @@ theme_override_constants/separation = 10
 
 [node name="BomblIcon" type="TextureRect" parent="BombsCounter/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_qc5w2")
+texture = SubResource("AtlasTexture_5h4o4")
 expand_mode = 2
 
 [node name="CurrentAmount" type="Label" parent="BombsCounter/HBoxContainer"]

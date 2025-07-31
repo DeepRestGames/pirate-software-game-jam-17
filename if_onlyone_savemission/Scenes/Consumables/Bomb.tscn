@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://jscwt3xt4bj"]
 
 [ext_resource type="Script" uid="uid://bpvusdpq0ytod" path="res://Scripts/Consumables/Bomb.gd" id="1_d3y8j"]
-[ext_resource type="Texture2D" uid="uid://depuhtpigf0n1" path="res://Assets/Sprites/Consumables.png" id="1_jmren"]
+[ext_resource type="Texture2D" uid="uid://depuhtpigf0n1" path="res://Assets/UI/Consumables.png" id="1_jmren"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kdrj4"]
 radius = 200.0
