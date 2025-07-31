@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
 [ext_resource type="FontFile" uid="uid://078w1ofr2xjx" path="res://Assets/Fonts/Micro5-Regular.ttf" id="2_gmqj4"]
-[ext_resource type="Texture2D" uid="uid://cv8hmxb7wdyar" path="res://icon.svg" id="2_qc5w2"]
 [ext_resource type="Script" uid="uid://bore17jo71by6" path="res://Scripts/UI/FabricatorMaterialCounter.gd" id="2_xaom8"]
 [ext_resource type="Script" uid="uid://ykgqogdlqidp" path="res://Scripts/UI/HPCounter.gd" id="4_4bm6u"]
 [ext_resource type="Script" uid="uid://blctfngfvyhaa" path="res://Scripts/UI/PowerupChipsCounter.gd" id="4_d2sja"]
@@ -21,47 +20,58 @@
 [ext_resource type="Script" uid="uid://qccpvk1auj7o" path="res://Scripts/Ship/FabricatorPanel.gd" id="14_jt2rc"]
 [ext_resource type="Script" uid="uid://7ps6v0je1128" path="res://Scripts/Ship/PowerupsPanel.gd" id="15_jbjhr"]
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ako3u"]
-atlas = ExtResource("4_dds1n")
-region = Rect2(72, 8, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_khvou"]
-atlas = ExtResource("6_cn5rm")
-region = Rect2(11, 13, 40, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_55bpt"]
-atlas = ExtResource("8_cn5rm")
-region = Rect2(3, 4, 9, 9)
+[ext_resource type="Texture2D" uid="uid://clnud4g1kr1vv" path="res://Assets/Illustrations/ShipInteriorBackground.png" id="18_khvou"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yd1yt"]
 atlas = ExtResource("11_cn5rm")
 region = Rect2(0, 0, 17, 17)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eebq5"]
+bg_color = Color(1, 1, 1, 0.133333)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18ujm"]
+bg_color = Color(1, 1, 1, 0.109804)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khvou"]
+atlas = ExtResource("6_cn5rm")
+region = Rect2(11, 13, 40, 40)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0n5r3"]
 atlas = ExtResource("13_ako3u")
 region = Rect2(2.5, 2, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ako3u"]
+atlas = ExtResource("4_dds1n")
+region = Rect2(72, 8, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5h4o4"]
 atlas = ExtResource("13_ako3u")
 region = Rect2(18.5, 18.5, 11, 11)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eebq5"]
-bg_color = Color(0.122067, 0.122067, 0.122067, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18ujm"]
-draw_center = false
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="AtlasTexture" id="AtlasTexture_55bpt"]
+atlas = ExtResource("8_cn5rm")
+region = Rect2(3, 4, 9, 9)
 
 [node name="HUD" type="Control"]
+z_index = 1
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
 anchors_preset = 15
@@ -70,6 +80,473 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ArrowHints" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("5_d2sja")
+
+[node name="ArrowHintShip" type="Control" parent="ArrowHints"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_lelo4")
+
+[node name="ArrowTexture" type="TextureRect" parent="ArrowHints/ArrowHintShip"]
+modulate = Color(0.85, 0.68425, 0.5185, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+texture = SubResource("AtlasTexture_yd1yt")
+stretch_mode = 5
+flip_h = true
+
+[node name="DistanceLabel" type="Label" parent="ArrowHints/ArrowHintShip"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("2_gmqj4")
+text = "10m"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowHintPowerups" type="Control" parent="ArrowHints"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShipMenu" type="Control" parent="."]
+process_mode = 3
+visible = false
+z_index = 100
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_18ujm")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ShipMenu"]
+z_as_relative = false
+layout_mode = 0
+offset_left = -0.000427246
+offset_top = -1.52588e-05
+offset_right = 39.9996
+offset_bottom = 40.0
+texture = ExtResource("18_khvou")
+
+[node name="Background" type="Panel" parent="ShipMenu"]
+custom_minimum_size = Vector2(700, 550)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.239583
+anchor_top = 0.114198
+anchor_right = 0.760417
+anchor_bottom = 0.885802
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eebq5")
+metadata/_edit_use_anchors_ = true
+
+[node name="PowerupsPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 450)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0583333
+anchor_top = 0.05
+anchor_right = 0.475
+anchor_bottom = 0.95
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+script = ExtResource("15_jbjhr")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel"]
+custom_minimum_size = Vector2(220, 410)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.06
+anchor_top = 0.0444444
+anchor_right = 0.94
+anchor_bottom = 0.955556
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+text = "POWERUPS"
+horizontal_alignment = 1
+
+[node name="HP" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
+layout_mode = 2
+text = "MAX HP"
+horizontal_alignment = 1
+
+[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="HPLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
+layout_mode = 2
+text = "+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
+layout_mode = 2
+alignment = 2
+
+[node name="PowerupChipIcon" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_khvou")
+expand_mode = 2
+
+[node name="HPCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="Speed" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
+layout_mode = 2
+text = "SPEED"
+horizontal_alignment = 1
+
+[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="SpeedLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
+layout_mode = 2
+text = "+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
+layout_mode = 2
+alignment = 2
+
+[node name="PowerupChipIcon" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_khvou")
+expand_mode = 2
+
+[node name="SpeedCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="Ammo" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="AmmoLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
+layout_mode = 2
+text = "AMMO CAPACITY"
+horizontal_alignment = 1
+
+[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
+layout_mode = 2
+alignment = 1
+
+[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+modulate = Color(0.206279, 0.206279, 0.206279, 1)
+layout_mode = 2
+texture = ExtResource("15_pd044")
+expand_mode = 3
+
+[node name="AmmoLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
+layout_mode = 2
+text = "+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
+layout_mode = 2
+alignment = 2
+
+[node name="PowerupChipIcon" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_khvou")
+expand_mode = 2
+
+[node name="AmmoCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="FabricatorPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.05
+anchor_right = 0.941667
+anchor_bottom = 0.45
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+script = ExtResource("14_jt2rc")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel"]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelTitle" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
+layout_mode = 2
+text = "FABRICATOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PotionCrafting" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PotionlIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_0n5r3")
+expand_mode = 2
+
+[node name="CurrentPotionsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
+layout_mode = 2
+text = "x0"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
+layout_mode = 2
+alignment = 1
+
+[node name="CraftPotionButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer"]
+modulate = Color(0, 0.65441, 5.77569e-07, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "+"
+icon = ExtResource("15_pd044")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer"]
+layout_mode = 2
+
+[node name="FabricatorMaterialIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ako3u")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="BombsCrafting" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BomblIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_5h4o4")
+expand_mode = 2
+
+[node name="CurrentBombsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
+layout_mode = 2
+text = "x0"
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
+layout_mode = 2
+alignment = 1
+
+[node name="CraftBombButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer"]
+modulate = Color(0, 0.65441, 5.77569e-07, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "+"
+icon = ExtResource("15_pd044")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer"]
+layout_mode = 2
+
+[node name="FabricatorMaterialIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ako3u")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="MoveShipPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.5
+anchor_right = 0.941667
+anchor_bottom = 0.7
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveShipButton" type="Button" parent="ShipMenu/Background/MoveShipPanel"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.25
+anchor_right = 0.8
+anchor_bottom = 0.75
+offset_left = 28.0
+offset_top = 9.5
+offset_right = -28.0
+offset_bottom = -9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "MOVE SHIP"
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitShipPanel" type="Panel" parent="ShipMenu/Background"]
+custom_minimum_size = Vector2(250, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.75
+anchor_right = 0.941667
+anchor_bottom = 0.95
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+metadata/_edit_use_anchors_ = true
+
+[node name="ExitShipButton" type="Button" parent="ShipMenu/Background/ExitShipPanel"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.25
+anchor_right = 0.8
+anchor_bottom = 0.75
+offset_left = 28.0
+offset_top = 9.5
+offset_right = -28.0
+offset_bottom = -9.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "EXIT SHIP"
 metadata/_edit_use_anchors_ = true
 
 [node name="AmmoCounter" type="Control" parent="."]
@@ -201,56 +678,6 @@ theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 32
 text = "0"
 
-[node name="ArrowHints" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("5_d2sja")
-
-[node name="ArrowHintShip" type="Control" parent="ArrowHints"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_lelo4")
-
-[node name="ArrowTexture" type="TextureRect" parent="ArrowHints/ArrowHintShip"]
-modulate = Color(0.85, 0.68425, 0.5185, 1)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-pivot_offset = Vector2(20, 20)
-texture = SubResource("AtlasTexture_yd1yt")
-stretch_mode = 5
-flip_h = true
-
-[node name="DistanceLabel" type="Label" parent="ArrowHints/ArrowHintShip"]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 40.0
-offset_bottom = 63.0
-theme_override_fonts/font = ExtResource("2_gmqj4")
-text = "10m"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ArrowHintPowerups" type="Control" parent="ArrowHints"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="PotionsCounter" type="Control" parent="."]
 process_mode = 3
 layout_mode = 1
@@ -351,412 +778,6 @@ theme_override_font_sizes/font_size = 20
 text = "INTERACT"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ShipMenu" type="Control" parent="."]
-process_mode = 3
-visible = false
-z_index = 100
-z_as_relative = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_18ujm")
-metadata/_edit_use_anchors_ = true
-
-[node name="Background" type="Panel" parent="ShipMenu"]
-custom_minimum_size = Vector2(600, 500)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.239583
-anchor_top = 0.114198
-anchor_right = 0.760417
-anchor_bottom = 0.885802
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_eebq5")
-metadata/_edit_use_anchors_ = true
-
-[node name="PowerupsPanel" type="Panel" parent="ShipMenu/Background"]
-custom_minimum_size = Vector2(250, 450)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0583333
-anchor_top = 0.05
-anchor_right = 0.475
-anchor_bottom = 0.95
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
-script = ExtResource("15_jbjhr")
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel"]
-custom_minimum_size = Vector2(220, 410)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.06
-anchor_top = 0.0444444
-anchor_right = 0.94
-anchor_bottom = 0.955556
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
-layout_mode = 2
-text = "POWERUPS"
-horizontal_alignment = 1
-
-[node name="HP" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
-layout_mode = 2
-text = "HP"
-horizontal_alignment = 1
-
-[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
-layout_mode = 2
-alignment = 1
-
-[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="HPLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots"]
-layout_mode = 2
-text = "+"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
-layout_mode = 2
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_qc5w2")
-expand_mode = 3
-
-[node name="HPCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/HBoxContainer"]
-layout_mode = 2
-text = "10"
-
-[node name="Speed" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
-layout_mode = 2
-
-[node name="SpeedLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
-layout_mode = 2
-text = "SPEED"
-horizontal_alignment = 1
-
-[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
-layout_mode = 2
-alignment = 1
-
-[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="SpeedLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots"]
-layout_mode = 2
-text = "+"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
-layout_mode = 2
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_qc5w2")
-expand_mode = 3
-
-[node name="SpeedCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/HBoxContainer"]
-layout_mode = 2
-text = "10"
-
-[node name="Ammo" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
-layout_mode = 2
-
-[node name="AmmoLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
-layout_mode = 2
-text = "AMMO CAPACITY"
-horizontal_alignment = 1
-
-[node name="PowerupSlots" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
-layout_mode = 2
-alignment = 1
-
-[node name="PowerupSlot1" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot2" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot3" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot4" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="PowerupSlot5" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
-modulate = Color(0.206279, 0.206279, 0.206279, 1)
-layout_mode = 2
-texture = ExtResource("15_pd044")
-expand_mode = 3
-
-[node name="AmmoLevelUpButton" type="Button" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/PowerupSlots"]
-layout_mode = 2
-text = "+"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
-layout_mode = 2
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_qc5w2")
-expand_mode = 3
-
-[node name="AmmoCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/HBoxContainer"]
-layout_mode = 2
-text = "10"
-
-[node name="FabricatorPanel" type="Panel" parent="ShipMenu/Background"]
-custom_minimum_size = Vector2(250, 200)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.525
-anchor_top = 0.05
-anchor_right = 0.941667
-anchor_bottom = 0.45
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
-script = ExtResource("14_jt2rc")
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel"]
-custom_minimum_size = Vector2(250, 180)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.05
-anchor_right = 1.0
-anchor_bottom = 0.95
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
-metadata/_edit_use_anchors_ = true
-
-[node name="PanelTitle" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
-layout_mode = 2
-text = "FABRICATOR"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PotionCrafting" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="PotionIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
-layout_mode = 2
-texture = ExtResource("2_qc5w2")
-expand_mode = 3
-
-[node name="CurrentPotionsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
-layout_mode = 2
-text = "x0"
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting"]
-layout_mode = 2
-alignment = 1
-
-[node name="CraftPotionButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer"]
-modulate = Color(0, 0.65441, 5.77569e-07, 1)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "+"
-icon = ExtResource("15_pd044")
-icon_alignment = 1
-expand_icon = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer"]
-layout_mode = 2
-
-[node name="FabricatorMaterialIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_qc5w2")
-expand_mode = 3
-
-[node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "10"
-
-[node name="BombsCrafting" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="BombIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
-layout_mode = 2
-texture = ExtResource("2_qc5w2")
-expand_mode = 3
-
-[node name="CurrentBombsNumber" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
-layout_mode = 2
-text = "x0"
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting"]
-layout_mode = 2
-alignment = 1
-
-[node name="CraftBombButton" type="Button" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer"]
-modulate = Color(0, 0.65441, 5.77569e-07, 1)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "+"
-icon = ExtResource("15_pd044")
-icon_alignment = 1
-expand_icon = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer"]
-layout_mode = 2
-
-[node name="FabricatorMaterialIcon" type="TextureRect" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_qc5w2")
-expand_mode = 3
-
-[node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "10"
-
-[node name="MoveShipPanel" type="Panel" parent="ShipMenu/Background"]
-custom_minimum_size = Vector2(250, 100)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.525
-anchor_top = 0.5
-anchor_right = 0.941667
-anchor_bottom = 0.7
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
-metadata/_edit_use_anchors_ = true
-
-[node name="MoveShipButton" type="Button" parent="ShipMenu/Background/MoveShipPanel"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.25
-anchor_right = 0.8
-anchor_bottom = 0.75
-offset_left = 28.0
-offset_top = 9.5
-offset_right = -28.0
-offset_bottom = -9.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "MOVE SHIP"
-metadata/_edit_use_anchors_ = true
-
-[node name="ExitShipPanel" type="Panel" parent="ShipMenu/Background"]
-custom_minimum_size = Vector2(250, 100)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.525
-anchor_top = 0.75
-anchor_right = 0.941667
-anchor_bottom = 0.95
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
-metadata/_edit_use_anchors_ = true
-
-[node name="ExitShipButton" type="Button" parent="ShipMenu/Background/ExitShipPanel"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.25
-anchor_right = 0.8
-anchor_bottom = 0.75
-offset_left = 28.0
-offset_top = 9.5
-offset_right = -28.0
-offset_bottom = -9.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "EXIT SHIP"
-metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots/HPLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_hp_level_up_button_pressed"]
 [connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots/SpeedLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_speed_level_up_button_pressed"]
