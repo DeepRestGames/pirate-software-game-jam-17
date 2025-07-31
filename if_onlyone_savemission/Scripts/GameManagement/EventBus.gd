@@ -69,7 +69,7 @@ signal add_fabricator_material(value)
 signal remove_fabricator_material(value)
 
 @warning_ignore("unused_signal")
-signal send_powerup_global_position(powerup_global_position)
+signal send_powerup_global_position(powerup_global_position, powerup_node_name)
 
 @warning_ignore("unused_signal")
 signal clear_powerup_positions
@@ -79,6 +79,9 @@ signal add_powerup_chip(value)
 
 @warning_ignore("unused_signal")
 signal remove_powerup_chip(value)
+
+@warning_ignore("unused_signal")
+signal powerup_picked_up(name)
 
 @warning_ignore("unused_signal")
 signal level_up_powerup(powerup_ID)

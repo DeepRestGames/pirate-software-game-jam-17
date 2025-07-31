@@ -156,7 +156,7 @@ func position_powerup_chip() -> void:
 		powerup_chip_instance.global_position = Vector2(x_coordinate, y_coordinate)
 		spare_consumables_parent.add_child(powerup_chip_instance)
 		
-		EventBus.emit_signal("send_powerup_global_position", powerup_chip_instance.global_position)
+		EventBus.emit_signal("send_powerup_global_position", powerup_chip_instance.global_position, powerup_chip_instance.name)
 
 
 func clear_procedural_generated_entities() -> void:
