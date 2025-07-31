@@ -14,6 +14,9 @@ func _ready() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "tick_boom":
 		for body in hitbox_area.get_overlapping_bodies():
+			if body.is_in_group("Player"):
+				body.take_damage(1)
+			
 			body.take_damage(3)
 	
 	call_deferred("queue_free")
