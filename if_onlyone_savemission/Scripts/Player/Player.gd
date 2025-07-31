@@ -149,6 +149,9 @@ func shoot() -> void:
 
 
 func reload() -> void:
+	if currentAmmo == maxAmmo:
+		return
+	
 	currentReloadCooldown = reloadCooldown
 	EventBus.emit_signal("is_reloading", true)
 
