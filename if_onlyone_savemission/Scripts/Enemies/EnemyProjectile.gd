@@ -2,7 +2,7 @@ extends RigidBody2D
 
 
 var player: Player
-@export var PROJECTILE_SPEED: float = 300
+@export var PROJECTILE_SPEED: float = 500
 var direction: Vector2
 
 var projectile_reach = 1000
