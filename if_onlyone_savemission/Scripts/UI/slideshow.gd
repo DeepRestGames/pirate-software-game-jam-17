@@ -80,5 +80,5 @@ func next_slide():
 			text10.hide()
 			text11.show()
 		12:
-			get_tree().change_scene_to_file("res://Scenes/LittleMainGameScene_2.tscn")
+			get_tree().change_scene_to_file("res://Scenes/LittleMainGameScene.tscn")
 		

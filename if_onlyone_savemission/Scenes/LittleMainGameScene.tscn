@@ -29,7 +29,7 @@ point_count = 4
 [node name="GroundSprite" type="Sprite2D" parent="GroundFeatures"]
 modulate = Color(0.0705882, 0.164706, 0.282353, 1)
 z_index = -100
-scale = Vector2(100, 100)
+scale = Vector2(160, 140)
 texture = ExtResource("1_aisys")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
