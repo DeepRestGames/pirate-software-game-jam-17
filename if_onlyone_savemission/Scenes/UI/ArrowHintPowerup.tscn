@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c04t44e7s7kf4"]
+[gd_scene load_steps=4 format=3 uid="uid://c04t44e7s7kf4"]
 
 [ext_resource type="Script" uid="uid://dli2w0tkeej1m" path="res://Scripts/UI/ArrowHintPowerupChip.gd" id="1_0avtt"]
-[ext_resource type="Texture2D" uid="uid://diyaie56mgt0a" path="res://Assets/UITextures/ArrowC.png" id="2_pbnol"]
+[ext_resource type="Texture2D" uid="uid://brqrjvs14wusx" path="res://Assets/UI/Arrow_V3.png" id="2_0avtt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbnol"]
+atlas = ExtResource("2_0avtt")
+region = Rect2(0, 0, 17, 17)
 
 [node name="ArrowHintPowerup" type="Control"]
 layout_mode = 3
@@ -16,15 +20,16 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_0avtt")
 
 [node name="ArrowTexture" type="TextureRect" parent="."]
-modulate = Color(0, 0.717995, 0.717996, 1)
+modulate = Color(0.4272, 0.79744, 0.89, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 pivot_offset = Vector2(20, 20)
-texture = ExtResource("2_pbnol")
+texture = SubResource("AtlasTexture_pbnol")
 stretch_mode = 5
 flip_h = true
 

@@ -1,10 +1,58 @@
-[gd_scene load_steps=7 format=3 uid="uid://jscwt3xt4bj"]
+[gd_scene load_steps=16 format=3 uid="uid://jscwt3xt4bj"]
 
 [ext_resource type="Script" uid="uid://bpvusdpq0ytod" path="res://Scripts/Consumables/Bomb.gd" id="1_d3y8j"]
-[ext_resource type="Texture2D" uid="uid://depuhtpigf0n1" path="res://Assets/Sprites/Consumables.png" id="1_jmren"]
+[ext_resource type="Texture2D" uid="uid://depuhtpigf0n1" path="res://Assets/UI/Consumables.png" id="1_jmren"]
+[ext_resource type="Texture2D" uid="uid://k7jnftpmsvwp" path="res://Assets/Sprites/WhiteParticles.png" id="3_kdrj4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kdrj4"]
 radius = 200.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hmtwy"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 5
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_kdrj4"]
+offsets = PackedFloat32Array(0, 0.190909, 0.427273, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.5, 0, 1, 0.84, 0.14, 0, 0.694118, 0, 0, 0, 0.27451)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hmtwy"]
+gradient = SubResource("Gradient_kdrj4")
+
+[sub_resource type="Curve" id="Curve_kdrj4"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, -60.6741), 0.0, 0.0, 0, 0, Vector2(1, 200), 485.393, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hmtwy"]
+curve = SubResource("Curve_kdrj4")
+
+[sub_resource type="Curve" id="Curve_6n106"]
+_data = [Vector2(0, 0.820225), 0.0, 0.398632, 0, 0, Vector2(0.992647, 0.123596), -2.35091, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ht11g"]
+curve = SubResource("Curve_6n106")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6n106"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 80.0
+gravity = Vector3(0, -200, 0)
+linear_accel_min = 0.999998
+linear_accel_max = 0.999998
+linear_accel_curve = SubResource("CurveTexture_hmtwy")
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 65.52
+scale_min = 20.0
+scale_max = 25.0
+scale_curve = SubResource("CurveTexture_ht11g")
+color_ramp = SubResource("GradientTexture1D_hmtwy")
+anim_speed_min = 6.62
+anim_speed_max = 16.0
 
 [sub_resource type="Animation" id="Animation_d3y8j"]
 length = 0.001
@@ -86,9 +134,18 @@ hframes = 2
 vframes = 2
 frame = 3
 
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_hmtwy")
+emitting = false
+texture = ExtResource("3_kdrj4")
+one_shot = true
+explosiveness = 0.7
+process_material = SubResource("ParticleProcessMaterial_6n106")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_kdrj4")
 }
 
+[connection signal="finished" from="ExplosionParticles" to="." method="_on_explosion_particles_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
