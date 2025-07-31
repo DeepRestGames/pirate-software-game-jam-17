@@ -10,6 +10,7 @@ extends CharacterBody2D
 #@onready var shooting_animation = $PlayerSprite/Weapon/WeaponSprite/ShootingAnimation
 const weapon_x_offset = 15
 const weapon_muzzle_x_offset = 10
+var player_blood_scene = preload("res://Scenes/Player/PlayerBlood.tscn")
 
 # Shooting
 var projectile = preload("res://Scenes/Player/PlayerProjectile.tscn")
@@ -18,8 +19,6 @@ var maxAmmo: int = 10
 var currentAmmo
 var reloadCooldown := 1.5
 var currentReloadCooldown : float
-
-
 
 # HP
 var currentHP: int = 3
@@ -58,6 +57,9 @@ func _ready() -> void:
 	EventBus.connect("remove_bomb", remove_bomb)
 	
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+	
+	EventBus.connect("player_respawned", on_player_respawned)
+	EventBus.connect("show_ship_menu", on_player_returned_to_ship)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -70,6 +72,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("place_bomb"):
 		place_bomb()
+	
+	if event.is_action_pressed("reload"):
+		reload()
 
 
 func get_movement_input() -> void:
@@ -122,6 +127,10 @@ func take_damage(value) -> void:
 	blinking_player_tween.tween_property(player_sprite, "visible", true, .001)
 	
 	EventBus.emit_signal("screen_shake", 20, 10)
+	
+	var player_blood_instance = player_blood_scene.instantiate()
+	player_blood_instance.global_position = position
+	get_tree().root.add_child(player_blood_instance)
 
 
 func shoot() -> void:
@@ -129,7 +138,6 @@ func shoot() -> void:
 	projectile_instance.global_position = muzzle_marker.global_position
 	get_parent().add_child(projectile_instance)
 	muzzle_marker.add_child(shooting_animation.instantiate())
-	
 	
 	currentAmmo -= 1
 	
@@ -141,6 +149,9 @@ func shoot() -> void:
 
 
 func reload() -> void:
+	if currentAmmo == maxAmmo:
+		return
+	
 	currentReloadCooldown = reloadCooldown
 	EventBus.emit_signal("is_reloading", true)
 
@@ -212,9 +223,42 @@ func remove_hp(value) -> void:
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
 	
 	if currentHP <= 0:
-		print("Player death")
+		clearConsumables()
 		EventBus.emit_signal("player_death")
 		call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
+
+
+func clearConsumables() -> void:
+	potions_quantity = 0
+	bombs_quantity = 0
+	fabricator_material_quantity = 0
+	powerup_chips_quantity = 0
+	send_HUD_update_data()
+
+
+func on_player_respawned() -> void:
+	full_hp()
+	full_ammo()
+	call_deferred("set_process_mode", Node.PROCESS_MODE_INHERIT)
+
+
+func on_player_returned_to_ship(value) -> void:
+	if value == true:
+		full_hp()
+		full_ammo()
+		send_HUD_update_data()
+		
+		EventBus.emit_signal("clear_map_from_enemies")
+
+
+func full_hp() -> void:
+	currentHP = maxHP
+	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+
+
+func full_ammo() -> void:
+	currentAmmo = maxAmmo
+	EventBus.emit_signal("update_current_ammo", currentAmmo)
 
 
 func heal_hp() -> void:
@@ -239,3 +283,12 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	elif body.is_in_group("EnemyProjectiles"):
 		body.queue_free()
 		take_damage(1)
+
+
+func send_HUD_update_data() -> void:
+	EventBus.emit_signal("update_current_ammo", currentAmmo)
+	EventBus.emit_signal("update_current_fabricator_material_count", fabricator_material_quantity)
+	EventBus.emit_signal("update_current_powerup_chips_count", powerup_chips_quantity)
+	EventBus.emit_signal("update_current_potions_count", potions_quantity)
+	EventBus.emit_signal("update_current_bombs_count", bombs_quantity)
+	EventBus.emit_signal("update_current_hp_HUD", currentHP)

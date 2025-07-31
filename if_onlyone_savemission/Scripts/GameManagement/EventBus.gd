@@ -9,6 +9,9 @@ extends Node
 signal player_death
 
 @warning_ignore("unused_signal")
+signal player_respawned
+
+@warning_ignore("unused_signal")
 signal player_shoot
 
 @warning_ignore("unused_signal")
@@ -18,13 +21,7 @@ signal is_reloading(value)
 signal screen_shake(magnitude, duration)
 
 @warning_ignore("unused_signal")
-signal difficulty_ramp_up
-
-@warning_ignore("unused_signal")
-signal difficulty_down
-
-@warning_ignore("unused_signal")
-signal final_boss_defeated
+signal clear_map_from_enemies
 
 
 # UI
@@ -72,7 +69,7 @@ signal add_fabricator_material(value)
 signal remove_fabricator_material(value)
 
 @warning_ignore("unused_signal")
-signal send_powerup_global_position(powerup_global_position)
+signal send_powerup_global_position(powerup_global_position, powerup_node_name)
 
 @warning_ignore("unused_signal")
 signal clear_powerup_positions
@@ -82,6 +79,9 @@ signal add_powerup_chip(value)
 
 @warning_ignore("unused_signal")
 signal remove_powerup_chip(value)
+
+@warning_ignore("unused_signal")
+signal powerup_picked_up(name)
 
 @warning_ignore("unused_signal")
 signal level_up_powerup(powerup_ID)
@@ -100,14 +100,6 @@ signal add_bomb(value)
 
 @warning_ignore("unused_signal")
 signal remove_bomb(value)
-
-
-# Particles
-@warning_ignore("unused_signal")
-signal spawn_spark_particles(global_position)
-
-@warning_ignore("unused_signal")
-signal spawn_blood_particles(global_position)
 
 
 # Audio

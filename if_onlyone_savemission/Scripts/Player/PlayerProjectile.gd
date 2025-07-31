@@ -7,6 +7,8 @@ extends RigidBody2D
 var direction: Vector2
 var has_collided := false
 
+var projectile_reach = 600
+
 
 func _ready() -> void:
 	var mouse_position = get_global_mouse_position()
@@ -15,7 +17,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var collision = move_and_collide(direction * PROJECTILE_SPEED * delta)
+	var movement_vector = direction * PROJECTILE_SPEED * delta
+	var collision = move_and_collide(movement_vector)
+	
+	projectile_reach -= movement_vector.length()
+	if projectile_reach <= 0:
+		queue_free()
+
 
 func on_impact():
 	if has_collided:

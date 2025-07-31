@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 
 
 @onready var enemies_parent_node = $EnemiesParentNode
@@ -42,19 +42,18 @@ func _on_enemies_spawn_timer_timeout() -> void:
 
 
 func take_damage(value) -> void:
+	var blinking_player_tween = get_tree().create_tween().set_parallel(false)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 0.0, 0.0), .05)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0), .05)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 0.0, 0.0), .05)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0), .05)
+	
 	hp -= value
 	if hp <= 0:
 		if randf_range(0, 1) <= drop_rate:
 			drop_material()
 		
 		queue_free()
-
-
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("PlayerProjectile"):
-		if body.has_method("on_impact"):
-			body.on_impact()
-		take_damage(1)
 
 
 func drop_material() -> void:
@@ -71,3 +70,10 @@ func _on_aggro_area_2d_body_entered(body: Node2D) -> void:
 func _on_aggro_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		enemies_spawn_timer.stop()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("PlayerProjectile"):
+		if body.has_method("on_impact"):
+			body.on_impact()
+		take_damage(1)

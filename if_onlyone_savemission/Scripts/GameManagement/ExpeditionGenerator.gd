@@ -33,8 +33,8 @@ var fabricator_material_scene = preload("res://Scenes/Consumables/FabricatorMate
 const min_number_fabricator_material = 50
 const max_number_fabricator_material = 200
 var powerup_chip_scene = preload("res://Scenes/Consumables/PowerupChip.tscn")
-const min_number_powerup_chips = 5
-const max_number_powerup_chips = 10
+const min_number_powerup_chips = 2
+const max_number_powerup_chips = 5
 
 
 func _ready() -> void:
@@ -47,6 +47,7 @@ func _ready() -> void:
 	generate_new_expedition()
 	
 	EventBus.connect("move_ship", move_ship)
+	EventBus.connect("clear_map_from_enemies", clear_map_from_enemies)
 
 
 func generate_new_expedition() -> void:
@@ -155,10 +156,12 @@ func position_powerup_chip() -> void:
 		powerup_chip_instance.global_position = Vector2(x_coordinate, y_coordinate)
 		spare_consumables_parent.add_child(powerup_chip_instance)
 		
-		EventBus.emit_signal("send_powerup_global_position", powerup_chip_instance.global_position)
+		EventBus.emit_signal("send_powerup_global_position", powerup_chip_instance.global_position, powerup_chip_instance.name)
 
 
 func clear_procedural_generated_entities() -> void:
+	EventBus.emit_signal("clear_powerup_positions")
+	
 	for i in navigation_region.get_children():
 		i.queue_free()
 	
@@ -166,13 +169,22 @@ func clear_procedural_generated_entities() -> void:
 		i.queue_free()
 	
 	for i in ground_features_parent.get_children():
+		if i.name == "GroundSprite":
+			continue
 		i.queue_free()
 	
 	for i in spare_consumables_parent.get_children():
 		i.queue_free()
-	EventBus.emit_signal("clear_powerup_positions")
 
 
 func move_ship() -> void:
 	clear_procedural_generated_entities()
 	generate_new_expedition()
+
+
+func clear_map_from_enemies() -> void:
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.call_deferred("queue_free")
+	
+	for enemy_projectile in get_tree().get_nodes_in_group("EnemyProjectiles"):
+		enemy_projectile.call_deferred("queue_free")

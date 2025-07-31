@@ -40,7 +40,7 @@ navigation_polygon = SubResource("NavigationPolygon_cp132")
 [node name="Ship" parent="." instance=ExtResource("2_aisys")]
 
 [node name="Player" parent="." instance=ExtResource("3_t5ngo")]
-position = Vector2(-166, 89)
+position = Vector2(0, 200)
 
 [node name="DifficultyManager" type="Node2D" parent="Player"]
 script = ExtResource("4_hjrmh")
@@ -53,5 +53,6 @@ curve = SubResource("Curve2D_qla6v")
 position = Vector2(-800, -500)
 
 [node name="ExpeditionGenerator" type="Node2D" parent="."]
+process_mode = 3
 script = ExtResource("7_nlbeb")
 environmental_obstacles = Array[PackedScene]([ExtResource("8_vyipi"), ExtResource("9_vx5l4")])

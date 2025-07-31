@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=31 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
 [ext_resource type="FontFile" uid="uid://078w1ofr2xjx" path="res://Assets/Fonts/Micro5-Regular.ttf" id="2_gmqj4"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://qccpvk1auj7o" path="res://Scripts/Ship/FabricatorPanel.gd" id="14_jt2rc"]
 [ext_resource type="Script" uid="uid://7ps6v0je1128" path="res://Scripts/Ship/PowerupsPanel.gd" id="15_jbjhr"]
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
+[ext_resource type="Script" uid="uid://bqgxhf03v15b8" path="res://Scripts/UI/DeathScreen.gd" id="18_b3vmo"]
 [ext_resource type="Texture2D" uid="uid://clnud4g1kr1vv" path="res://Assets/Illustrations/ShipInteriorBackground.png" id="18_khvou"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yd1yt"]
@@ -89,7 +90,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("5_d2sja")
 
 [node name="ArrowHintShip" type="Control" parent="ArrowHints"]
@@ -105,6 +106,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("5_lelo4")
 
 [node name="ArrowTexture" type="TextureRect" parent="ArrowHints/ArrowHintShip"]
@@ -131,6 +133,7 @@ vertical_alignment = 1
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="ShipMenu" type="Control" parent="."]
 process_mode = 3
@@ -557,6 +560,7 @@ anchor_right = 0.980903
 anchor_bottom = 0.976852
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("1_omqfp")
 metadata/_edit_use_anchors_ = true
 
@@ -594,6 +598,7 @@ anchor_top = 0.0231481
 anchor_right = 0.980903
 anchor_bottom = 0.0231481
 grow_horizontal = 0
+mouse_filter = 2
 script = ExtResource("2_xaom8")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="FabricatorMaterialCounter"]
@@ -629,6 +634,7 @@ offset_top = 55.0
 offset_right = -0.000244141
 offset_bottom = 55.0
 grow_horizontal = 0
+mouse_filter = 2
 script = ExtResource("4_d2sja")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PowerupChipsCounter"]
@@ -657,6 +663,7 @@ anchor_left = 0.0190972
 anchor_top = 0.0231481
 anchor_right = 0.0190972
 anchor_bottom = 0.0231481
+mouse_filter = 2
 script = ExtResource("4_4bm6u")
 metadata/_edit_use_anchors_ = true
 
@@ -689,6 +696,7 @@ offset_top = -128.0
 offset_right = 22.0
 offset_bottom = -128.0
 grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("9_i4i0y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PotionsCounter"]
@@ -721,6 +729,7 @@ offset_top = -68.0
 offset_right = 60.0
 offset_bottom = -68.0
 grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("10_yenib")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BombsCounter"]
@@ -745,12 +754,16 @@ horizontal_alignment = 2
 [node name="InteractionPrompt" type="Control" parent="."]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_top = -28.0
+offset_bottom = -28.0
 grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
+grow_vertical = 0
+mouse_filter = 2
 script = ExtResource("11_pydgx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InteractionPrompt"]
@@ -767,6 +780,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="InteractionPrompt/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.784314)
 layout_mode = 2
 texture = ExtResource("12_eebq5")
 expand_mode = 5
@@ -774,10 +788,25 @@ expand_mode = 5
 [node name="Label" type="Label" parent="InteractionPrompt/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gmqj4")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 30
 text = "INTERACT"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DeathScreen" type="TextureRect" parent="."]
+process_mode = 3
+modulate = Color(0, 0, 0, 0)
+z_index = 100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_pd044")
+script = ExtResource("18_b3vmo")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots/HPLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_hp_level_up_button_pressed"]
 [connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/PowerupSlots/SpeedLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_speed_level_up_button_pressed"]
