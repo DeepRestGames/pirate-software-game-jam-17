@@ -114,6 +114,7 @@ modulate = Color(0.85, 0.68425, 0.5185, 1)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.3, 1.3)
 pivot_offset = Vector2(20, 20)
 texture = SubResource("AtlasTexture_yd1yt")
 stretch_mode = 5
@@ -125,6 +126,7 @@ offset_top = 40.0
 offset_right = 40.0
 offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 30
 text = "10m"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -392,11 +394,13 @@ anchor_right = 0.94
 anchor_bottom = 0.955556
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 20
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 40
 text = "POWERUPS"
 horizontal_alignment = 1
 
@@ -405,6 +409,8 @@ layout_mode = 2
 
 [node name="HPLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 35
 text = "MAX HP"
 horizontal_alignment = 1
 
@@ -457,6 +463,8 @@ expand_mode = 2
 
 [node name="HPCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 25
 text = "10"
 
 [node name="Speed" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
@@ -464,6 +472,8 @@ layout_mode = 2
 
 [node name="SpeedLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 35
 text = "SPEED"
 horizontal_alignment = 1
 
@@ -516,6 +526,8 @@ expand_mode = 2
 
 [node name="SpeedCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Speed/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 25
 text = "10"
 
 [node name="Ammo" type="VBoxContainer" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer"]
@@ -523,6 +535,8 @@ layout_mode = 2
 
 [node name="AmmoLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 35
 text = "AMMO CAPACITY"
 horizontal_alignment = 1
 
@@ -575,6 +589,8 @@ expand_mode = 2
 
 [node name="AmmoCostLabel" type="Label" parent="ShipMenu/Background/PowerupsPanel/VBoxContainer/Ammo/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 25
 text = "10"
 
 [node name="FabricatorPanel" type="Panel" parent="ShipMenu/Background"]
@@ -604,6 +620,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PanelTitle" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 40
 text = "FABRICATOR"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -639,6 +657,8 @@ stretch_mode = 4
 
 [node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 25
 text = "10"
 
 [node name="BombsCrafting" type="HBoxContainer" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer"]
@@ -672,6 +692,8 @@ stretch_mode = 4
 
 [node name="FabricatorMaterialCost" type="Label" parent="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 25
 text = "10"
 
 [node name="MoveShipPanel" type="Panel" parent="ShipMenu/Background"]
@@ -701,6 +723,8 @@ offset_right = -28.0
 offset_bottom = -9.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 40
 text = "MOVE SHIP"
 metadata/_edit_use_anchors_ = true
 
@@ -731,6 +755,8 @@ offset_right = -28.0
 offset_bottom = -9.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 40
 text = "EXIT SHIP"
 metadata/_edit_use_anchors_ = true
 
