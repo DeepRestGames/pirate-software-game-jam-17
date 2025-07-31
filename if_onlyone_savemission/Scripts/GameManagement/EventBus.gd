@@ -9,6 +9,9 @@ extends Node
 signal player_death
 
 @warning_ignore("unused_signal")
+signal player_respawned
+
+@warning_ignore("unused_signal")
 signal player_shoot
 
 @warning_ignore("unused_signal")
@@ -18,13 +21,7 @@ signal is_reloading(value)
 signal screen_shake(magnitude, duration)
 
 @warning_ignore("unused_signal")
-signal difficulty_ramp_up
-
-@warning_ignore("unused_signal")
-signal difficulty_down
-
-@warning_ignore("unused_signal")
-signal final_boss_defeated
+signal clear_map_from_enemies
 
 
 # UI
@@ -100,14 +97,6 @@ signal add_bomb(value)
 
 @warning_ignore("unused_signal")
 signal remove_bomb(value)
-
-
-# Particles
-@warning_ignore("unused_signal")
-signal spawn_spark_particles(global_position)
-
-@warning_ignore("unused_signal")
-signal spawn_blood_particles(global_position)
 
 
 # Audio

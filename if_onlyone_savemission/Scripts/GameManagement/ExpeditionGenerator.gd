@@ -47,6 +47,7 @@ func _ready() -> void:
 	generate_new_expedition()
 	
 	EventBus.connect("move_ship", move_ship)
+	EventBus.connect("clear_map_from_enemies", clear_map_from_enemies)
 
 
 func generate_new_expedition() -> void:
@@ -176,3 +177,11 @@ func clear_procedural_generated_entities() -> void:
 func move_ship() -> void:
 	clear_procedural_generated_entities()
 	generate_new_expedition()
+
+
+func clear_map_from_enemies() -> void:
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		enemy.call_deferred("queue_free")
+	
+	for enemy_projectile in get_tree().get_nodes_in_group("EnemyProjectiles"):
+		enemy_projectile.call_deferred("queue_free")

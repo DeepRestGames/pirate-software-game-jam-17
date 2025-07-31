@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=21 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
 [ext_resource type="FontFile" uid="uid://078w1ofr2xjx" path="res://Assets/Fonts/Micro5-Regular.ttf" id="2_gmqj4"]
@@ -11,12 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://diyaie56mgt0a" path="res://Assets/UITextures/ArrowC.png" id="5_ykvyr"]
 [ext_resource type="Script" uid="uid://dac0rqgt8qakd" path="res://Scripts/UI/PotionsCounter.gd" id="9_i4i0y"]
 [ext_resource type="Script" uid="uid://dkten4p1hdo57" path="res://Scripts/UI/BombsCounter.gd" id="10_yenib"]
-[ext_resource type="Script" path="res://Scripts/UI/InteractionPrompt.gd" id="11_pydgx"]
+[ext_resource type="Script" uid="uid://dvxby01eopx46" path="res://Scripts/UI/InteractionPrompt.gd" id="11_pydgx"]
 [ext_resource type="Texture2D" uid="uid://c57y1q7g0c0b0" path="res://Assets/UITextures/E_Button.png" id="12_eebq5"]
 [ext_resource type="Script" uid="uid://6q37llehwjjk" path="res://Scripts/Ship/ShipMenu.gd" id="13_18ujm"]
 [ext_resource type="Script" uid="uid://qccpvk1auj7o" path="res://Scripts/Ship/FabricatorPanel.gd" id="14_jt2rc"]
 [ext_resource type="Script" uid="uid://7ps6v0je1128" path="res://Scripts/Ship/PowerupsPanel.gd" id="15_jbjhr"]
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
+[ext_resource type="Script" uid="uid://bqgxhf03v15b8" path="res://Scripts/UI/DeathScreen.gd" id="18_b3vmo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eebq5"]
 bg_color = Color(0.122067, 0.122067, 0.122067, 1)
@@ -727,6 +728,21 @@ offset_bottom = -9.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "EXIT SHIP"
+metadata/_edit_use_anchors_ = true
+
+[node name="DeathScreen" type="TextureRect" parent="."]
+process_mode = 3
+modulate = Color(0, 0, 0, 0)
+z_index = 100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_pd044")
+script = ExtResource("18_b3vmo")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="ShipMenu/Background/PowerupsPanel/VBoxContainer/HP/PowerupSlots/HPLevelUpButton" to="ShipMenu/Background/PowerupsPanel" method="_on_hp_level_up_button_pressed"]

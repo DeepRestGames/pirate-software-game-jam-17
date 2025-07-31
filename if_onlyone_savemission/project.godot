@@ -25,6 +25,7 @@ Player=""
 PlayerProjectile=""
 EnemyProjectiles=""
 Bombs=""
+Enemy=""
 
 [input]
 

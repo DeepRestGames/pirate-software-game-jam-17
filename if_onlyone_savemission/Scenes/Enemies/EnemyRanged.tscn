@@ -163,7 +163,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_w56bn"]
 radius = 66.6875
 
-[node name="EnemyRanged" type="CharacterBody2D"]
+[node name="EnemyRanged" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 10
 scale = Vector2(0.6, 0.6)
 collision_layer = 2
