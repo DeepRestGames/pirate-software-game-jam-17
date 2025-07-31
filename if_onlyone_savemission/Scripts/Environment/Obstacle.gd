@@ -9,6 +9,13 @@ func _ready() -> void:
 	
 
 func take_damage(value) -> void:
+	
+	var blinking_player_tween = get_tree().create_tween().set_parallel(false)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 0.0, 0.0), .05)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0), .05)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 0.0, 0.0), .05)
+	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0), .05)
+	
 	hp -= value
 
 	if hp <= 0:

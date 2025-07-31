@@ -63,7 +63,7 @@ func move_to_next_path_position(delta):
 func shoot():
 	var projectile_instance = projectile_scene.instantiate()
 	projectile_instance.global_position = position
-	get_parent().add_child(projectile_instance)
+	get_tree().root.add_child(projectile_instance)
 
 
 func stop_chasing_player():
