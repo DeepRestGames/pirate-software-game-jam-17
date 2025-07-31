@@ -72,6 +72,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("place_bomb"):
 		place_bomb()
+	
+	if event.is_action_pressed("reload"):
+		reload()
 
 
 func get_movement_input() -> void:
