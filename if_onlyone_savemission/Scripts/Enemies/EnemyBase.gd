@@ -11,6 +11,8 @@ var player: Player
 @export var drop_rate := 1
 var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
 
+var enemy_blood_scene = preload("res://Scenes/Enemies/EnemyBlood.tscn")
+
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
@@ -34,12 +36,18 @@ func take_damage(value):
 	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 0.0, 0.0), .05)
 	blinking_player_tween.tween_property(self, "modulate", Color(1.0, 1.0, 1.0), .05)
 	
+	var enemy_blood_instance = enemy_blood_scene.instantiate()
+	enemy_blood_instance.global_position = global_position
+	get_tree().root.add_child(enemy_blood_instance)
+	
 	hp -= value
 	if hp <= 0:
 		if randf_range(0, 1) <= drop_rate:
 			drop_material()
 		
 		queue_free()
+	
+	
 
 
 func drop_material() -> void:

@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dio0hl1shlf3t" path="res://Assets/Sprites/PlayerBloodParticles.png" id="1_yyym1"]
 
 [node name="PlayerBlood" type="Sprite2D"]
-scale = Vector2(2.5, 2.5)
+z_index = -40
+scale = Vector2(2.5, 1.5)
 texture = ExtResource("1_yyym1")
 hframes = 4
 vframes = 2
