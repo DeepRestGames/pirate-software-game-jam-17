@@ -5,11 +5,11 @@ var player: Player
 
 # Potions
 @onready var potion_material_cost_label = $VBoxContainer/PotionCrafting/VBoxContainer/HBoxContainer/FabricatorMaterialCost
-@export var potion_material_cost = 3
+@export var potion_material_cost = 5
 
 # Bombs
 @onready var bombs_material_cost_label = $VBoxContainer/BombsCrafting/VBoxContainer/HBoxContainer/FabricatorMaterialCost
-@export var bombs_material_cost = 6
+@export var bombs_material_cost = 10
 
 
 func _ready() -> void:

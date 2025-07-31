@@ -8,8 +8,8 @@ const origin = Vector2.ZERO
 # Environmental obstacles
 @onready var navigation_region = $"../NavigationRegion2D"
 @export var environmental_obstacles: Array[PackedScene]
-const min_number_environmental_obstacles = 50
-const max_number_environmental_obstacles = 200
+const min_number_environmental_obstacles = 30
+const max_number_environmental_obstacles = 150
 
 # Enemies
 @onready var enemies_parent = $"../Enemies"
@@ -20,8 +20,8 @@ const max_number_enemy_spawners = 30
 # Ground features
 @onready var ground_features_parent = $"../GroundFeatures"
 var ground_tiles_texture = preload("res://Assets/Sprites/GroundTexture.png")
-const min_number_ground_tiles = 500
-const max_number_ground_tiles = 1000
+const min_number_ground_tiles = 300
+const max_number_ground_tiles = 700
 
 var bomb_tutorial_scene = preload("res://Scenes/UI/BombTutorial.tscn")
 var potion_tutorial_scene = preload("res://Scenes/UI/PotionTutorial.tscn")

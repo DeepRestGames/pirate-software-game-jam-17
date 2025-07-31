@@ -18,7 +18,7 @@ enum PowerupID {
 ]
 @onready var hp_cost_label = $VBoxContainer/HP/HBoxContainer/HPCostLabel
 var powerup_hp_level = 0
-var powerup_hp_cost = [1, 20, 30, 50, 80]
+var powerup_hp_cost = [2, 3, 5, 8, 13]
 
 # Speed
 @onready var speed_powerup_slots = [ 
@@ -30,7 +30,7 @@ var powerup_hp_cost = [1, 20, 30, 50, 80]
 ]
 @onready var speed_cost_label = $VBoxContainer/Speed/HBoxContainer/SpeedCostLabel
 var powerup_speed_level = 0
-var powerup_speed_cost = [1, 20, 30, 50, 80]
+var powerup_speed_cost = [2, 3, 5, 8, 15]
 
 # Ammo
 @onready var ammo_powerup_slots = [ 
@@ -42,7 +42,7 @@ var powerup_speed_cost = [1, 20, 30, 50, 80]
 ]
 @onready var ammo_cost_label = $VBoxContainer/Ammo/HBoxContainer/AmmoCostLabel
 var powerup_ammo_level = 0
-var powerup_ammo_cost = [1, 20, 30, 50, 80]
+var powerup_ammo_cost = [2, 3, 5, 8, 13]
 
 
 func _ready() -> void:
