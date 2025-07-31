@@ -167,6 +167,8 @@ func clear_procedural_generated_entities() -> void:
 		i.queue_free()
 	
 	for i in ground_features_parent.get_children():
+		if i.name == "GroundSprite":
+			continue
 		i.queue_free()
 	
 	for i in spare_consumables_parent.get_children():
