@@ -2,6 +2,8 @@ class_name Player
 extends CharacterBody2D
 
 
+var prevent_inputs = false
+
 # Graphics
 @onready var player_sprite = $PlayerSprite
 @onready var animation_tree = $AnimationTree
@@ -60,9 +62,14 @@ func _ready() -> void:
 	
 	EventBus.connect("player_respawned", on_player_respawned)
 	EventBus.connect("show_ship_menu", on_player_returned_to_ship)
+	
+	EventBus.connect("hide_player", hide_player)
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if prevent_inputs:
+		return
+	
 	if event.is_action_pressed("shoot"):
 		if currentReloadCooldown <= 0:
 			shoot()
@@ -78,6 +85,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func get_movement_input() -> void:
+	if prevent_inputs:
+		return
+	
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_direction * movement_speed
 
@@ -298,3 +308,12 @@ func send_HUD_update_data() -> void:
 	EventBus.emit_signal("update_current_potions_count", potions_quantity)
 	EventBus.emit_signal("update_current_bombs_count", bombs_quantity)
 	EventBus.emit_signal("update_current_hp_HUD", currentHP)
+
+
+func hide_player(value) -> void:
+	if value:
+		hide()
+		prevent_inputs = true
+	else:
+		show()
+		prevent_inputs = false

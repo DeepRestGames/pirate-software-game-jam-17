@@ -195,6 +195,7 @@ hframes = 2
 position = Vector2(4.8, -0.8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 script = ExtResource("5_4wape")
 
 [node name="Hitbox" type="Area2D" parent="."]

@@ -49,6 +49,12 @@ signal update_current_hp_HUD(value)
 @warning_ignore("unused_signal")
 signal update_max_hp_HUD(value)
 
+@warning_ignore("unused_signal")
+signal fade_to_black
+
+@warning_ignore("unused_signal")
+signal fade_to_normal
+
 
 # Ship
 @warning_ignore("unused_signal")
@@ -59,6 +65,12 @@ signal show_ship_menu(value)
 
 @warning_ignore("unused_signal")
 signal move_ship
+
+@warning_ignore("unused_signal")
+signal move_ship_end
+
+@warning_ignore("unused_signal")
+signal hide_player(value)
 
 
 # Consumables

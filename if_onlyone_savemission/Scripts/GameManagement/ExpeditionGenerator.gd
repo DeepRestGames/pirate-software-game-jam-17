@@ -46,7 +46,7 @@ func _ready() -> void:
 	
 	generate_new_expedition()
 	
-	EventBus.connect("move_ship", move_ship)
+	EventBus.connect("move_ship_end", on_ship_moved)
 	EventBus.connect("clear_map_from_enemies", clear_map_from_enemies)
 
 
@@ -180,7 +180,7 @@ func clear_procedural_generated_entities() -> void:
 		i.queue_free()
 
 
-func move_ship() -> void:
+func on_ship_moved() -> void:
 	clear_procedural_generated_entities()
 	generate_new_expedition()
 

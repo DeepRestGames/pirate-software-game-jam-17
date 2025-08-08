@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://qccpvk1auj7o" path="res://Scripts/Ship/FabricatorPanel.gd" id="14_jt2rc"]
 [ext_resource type="Script" uid="uid://7ps6v0je1128" path="res://Scripts/Ship/PowerupsPanel.gd" id="15_jbjhr"]
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
-[ext_resource type="Script" uid="uid://bqgxhf03v15b8" path="res://Scripts/UI/DeathScreen.gd" id="18_b3vmo"]
+[ext_resource type="Script" uid="uid://bqgxhf03v15b8" path="res://Scripts/UI/BlackScreen.gd" id="18_b3vmo"]
 [ext_resource type="Texture2D" uid="uid://clnud4g1kr1vv" path="res://Assets/Illustrations/ShipInteriorBackground.png" id="18_khvou"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yd1yt"]
@@ -802,7 +802,7 @@ text = "INTERACT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DeathScreen" type="TextureRect" parent="."]
+[node name="BlackScreen" type="TextureRect" parent="."]
 process_mode = 3
 modulate = Color(0, 0, 0, 0)
 z_index = 100
