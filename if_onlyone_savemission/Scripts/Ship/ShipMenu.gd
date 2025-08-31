@@ -26,9 +26,5 @@ func show_ship_menu(value) -> void:
 		Engine.time_scale = 1
 
 
-func _on_move_ship_button_pressed() -> void:
-	EventBus.emit_signal("move_ship")
-
-
 func _on_exit_ship_button_pressed() -> void:
 	show_ship_menu(false)

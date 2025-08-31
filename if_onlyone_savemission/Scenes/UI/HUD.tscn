@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b8e4ms8gpa7de"]
+[gd_scene load_steps=33 format=3 uid="uid://b8e4ms8gpa7de"]
 
 [ext_resource type="Script" uid="uid://cls3l3tvbwhrv" path="res://Scripts/UI/AmmoCounter.gd" id="1_omqfp"]
 [ext_resource type="FontFile" uid="uid://078w1ofr2xjx" path="res://Assets/Fonts/Micro5-Regular.ttf" id="2_gmqj4"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="15_pd044"]
 [ext_resource type="Script" uid="uid://bqgxhf03v15b8" path="res://Scripts/UI/BlackScreen.gd" id="18_b3vmo"]
 [ext_resource type="Texture2D" uid="uid://clnud4g1kr1vv" path="res://Assets/Illustrations/ShipInteriorBackground.png" id="18_khvou"]
+[ext_resource type="Script" uid="uid://bi5t2me3eqvea" path="res://Scripts/Ship/MoveShipPanel.gd" id="20_55bpt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yd1yt"]
 atlas = ExtResource("11_cn5rm")
@@ -70,6 +71,10 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4bpa"]
+atlas = ExtResource("4_dds1n")
+region = Rect2(72, 8, 16, 16)
 
 [node name="HUD" type="Control"]
 z_index = 100
@@ -338,7 +343,6 @@ horizontal_alignment = 2
 
 [node name="ShipMenu" type="Control" parent="."]
 process_mode = 3
-visible = false
 z_index = 150
 layout_mode = 1
 anchors_preset = 15
@@ -707,26 +711,45 @@ anchor_bottom = 0.7
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_18ujm")
+script = ExtResource("20_55bpt")
 metadata/_edit_use_anchors_ = true
 
-[node name="MoveShipButton" type="Button" parent="ShipMenu/Background/MoveShipPanel"]
-custom_minimum_size = Vector2(150, 50)
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/MoveShipPanel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.25
-anchor_right = 0.8
-anchor_bottom = 0.75
-offset_left = 28.0
-offset_top = 9.5
-offset_right = -28.0
-offset_bottom = -9.5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MoveShipButton" type="Button" parent="ShipMenu/Background/MoveShipPanel/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gmqj4")
 theme_override_font_sizes/font_size = 40
 text = "MOVE SHIP"
 metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="ShipMenu/Background/MoveShipPanel/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ShipMenu/Background/MoveShipPanel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_p4bpa")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MoveShipCost" type="Label" parent="ShipMenu/Background/MoveShipPanel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gmqj4")
+theme_override_font_sizes/font_size = 40
+text = "50"
 
 [node name="ExitShipPanel" type="Panel" parent="ShipMenu/Background"]
 custom_minimum_size = Vector2(250, 100)
@@ -823,5 +846,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="visibility_changed" from="ShipMenu/Background/FabricatorPanel" to="ShipMenu/Background/FabricatorPanel" method="_on_visibility_changed"]
 [connection signal="pressed" from="ShipMenu/Background/FabricatorPanel/VBoxContainer/PotionCrafting/VBoxContainer/CraftPotionButton" to="ShipMenu/Background/FabricatorPanel" method="_on_craft_potion_button_pressed"]
 [connection signal="pressed" from="ShipMenu/Background/FabricatorPanel/VBoxContainer/BombsCrafting/VBoxContainer/CraftBombButton" to="ShipMenu/Background/FabricatorPanel" method="_on_craft_bomb_button_pressed"]
-[connection signal="pressed" from="ShipMenu/Background/MoveShipPanel/MoveShipButton" to="ShipMenu" method="_on_move_ship_button_pressed"]
+[connection signal="pressed" from="ShipMenu/Background/MoveShipPanel/HBoxContainer/MoveShipButton" to="ShipMenu/Background/MoveShipPanel" method="_on_move_ship_button_pressed"]
 [connection signal="pressed" from="ShipMenu/Background/ExitShipPanel/ExitShipButton" to="ShipMenu" method="_on_exit_ship_button_pressed"]
