@@ -1,6 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bgw3vnrt1kuhu"]
 
 [ext_resource type="Texture2D" uid="uid://cqavx876fgh5s" path="res://Assets/Sprites/WhiteSprites.png" id="1_aisys"]
+[ext_resource type="Script" uid="uid://daj2r02cwy6mj" path="res://Scripts/Environment/BloodMarks.gd" id="1_t5ngo"]
 [ext_resource type="PackedScene" uid="uid://dyhaxeflnkmln" path="res://Scenes/Ship/Ship.tscn" id="2_aisys"]
 [ext_resource type="PackedScene" uid="uid://b3nrx4ogcfxml" path="res://Scenes/Player/Player.tscn" id="3_t5ngo"]
 [ext_resource type="Script" uid="uid://c8p7jaqynocev" path="res://Scripts/GameManagement/DifficultyManager.gd" id="4_hjrmh"]
@@ -23,6 +24,9 @@ _data = {
 point_count = 4
 
 [node name="MainGameScene" type="Node2D"]
+
+[node name="BloodMarksParent" type="Node2D" parent="." groups=["BloodMarks"]]
+script = ExtResource("1_t5ngo")
 
 [node name="GroundFeatures" type="Node2D" parent="."]
 

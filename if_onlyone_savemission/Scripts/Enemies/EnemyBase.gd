@@ -12,11 +12,13 @@ var player: Player
 var fabricatorMaterialScene = preload("res://Scenes/Consumables/FabricatorMaterial.tscn")
 
 var enemy_blood_scene = preload("res://Scenes/Enemies/EnemyBlood.tscn")
+var blood_marks_parent
 
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
 	#EventBus.connect("player_death", stop_chasing_player)
+	blood_marks_parent = get_tree().get_first_node_in_group("BloodMarks")
 
 
 func stop_chasing_player():
@@ -38,7 +40,7 @@ func take_damage(value):
 	
 	var enemy_blood_instance = enemy_blood_scene.instantiate()
 	enemy_blood_instance.global_position = global_position
-	get_tree().root.add_child(enemy_blood_instance)
+	blood_marks_parent.add_child(enemy_blood_instance)
 	
 	hp -= value
 	if hp <= 0:

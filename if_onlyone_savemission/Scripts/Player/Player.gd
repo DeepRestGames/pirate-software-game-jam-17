@@ -13,6 +13,7 @@ var prevent_inputs = false
 const weapon_x_offset = 15
 const weapon_muzzle_x_offset = 10
 var player_blood_scene = preload("res://Scenes/Player/PlayerBlood.tscn")
+var blood_marks_parent
 
 # Shooting
 var projectile = preload("res://Scenes/Player/PlayerProjectile.tscn")
@@ -64,6 +65,8 @@ func _ready() -> void:
 	EventBus.connect("show_ship_menu", on_player_returned_to_ship)
 	
 	EventBus.connect("hide_player", hide_player)
+	
+	blood_marks_parent = get_tree().get_first_node_in_group("BloodMarks")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -140,7 +143,7 @@ func take_damage(value) -> void:
 	
 	var player_blood_instance = player_blood_scene.instantiate()
 	player_blood_instance.global_position = position
-	get_tree().root.add_child(player_blood_instance)
+	blood_marks_parent.add_child(player_blood_instance)
 
 
 func shoot() -> void:
