@@ -55,7 +55,12 @@ func _ready() -> void:
 	speed_cost_label.text = str(powerup_speed_cost[powerup_speed_level])
 	ammo_cost_label.text = str(powerup_ammo_cost[powerup_ammo_level])
 	
+	hp_level_up_button.disabled = true
+	speed_level_up_button.disabled = true
+	ammo_level_up_button.disabled = true
+	
 	EventBus.connect("level_up_powerup_completed", level_up_powerup_completed)
+	EventBus.connect("update_current_powerup_chips_count", check_powerups_cost)
 
 
 func _on_hp_level_up_button_pressed() -> void:
@@ -104,3 +109,21 @@ func level_up_powerup_completed(powerup_ID: PowerupID, level):
 				ammo_level_up_button.disabled = true
 			else:
 				ammo_cost_label.text = str(powerup_ammo_cost[powerup_ammo_level])
+
+
+func check_powerups_cost(current_powerups) -> void:
+	if current_powerups < powerup_hp_cost[powerup_hp_level]:
+		hp_level_up_button.disabled = true
+	else:
+		hp_level_up_button.disabled = false
+	
+	if current_powerups < powerup_speed_cost[powerup_speed_level]:
+		speed_level_up_button.disabled = true
+	else:
+		speed_level_up_button.disabled = false
+	
+	if current_powerups < powerup_ammo_cost[powerup_ammo_level]:
+		ammo_level_up_button.disabled = true
+	else:
+		ammo_level_up_button.disabled = false
+	
